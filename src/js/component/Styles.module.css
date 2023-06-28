@@ -1,0 +1,26 @@
+body {
+    background: url('../../img/starwars.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.modal {
+    color: white;
+    background-color: transparent;
+    backdrop-filter: blur(8px);
+  }
+
+.starWarImage{
+    background: url('../../img/starWarsLetters.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    }      
+.cardsOverflow{
+    display: flex;
+    overflow: scroll;
+    height: 300px;
+}
+.cardsStyle{
+    width: "300px";
+    height: "400px";
+    margin: "0px 0px 0px 20px"
+}
