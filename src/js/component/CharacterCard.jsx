@@ -26,6 +26,7 @@ const CharacterCard = ({ character }) => {
                     margin: "0px 0px 0px 20px"
                 }}>
                     <div className="card-body">
+                        <img src={`https://starwars-visualguide.com/assets/img/characters/${character.uid}.jpg`} className="card-img-top" alt="..." />
                         <h5 className="card-title">{character.name}</h5>
                         <p className="card-text">Gender: {character.gender}</p>
                         <p className="card-text">Height: {character.height}</p>

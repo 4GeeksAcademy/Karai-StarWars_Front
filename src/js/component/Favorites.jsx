@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import { useContext } from 'react'
 import { Context } from '../store/appContext'
+import styles from "../component/Styles.module.css";
 
 
 const Favorites = () => {
@@ -30,7 +31,7 @@ const Favorites = () => {
                 })} */}
                 {store.favorites.map((element, index) => {
                     return (
-                        <li key={index}>
+                        <li key={index} className={styles.dropdownContent}>
 
                             {element}
                             <i

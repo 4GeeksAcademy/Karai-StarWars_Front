@@ -24,3 +24,23 @@ body {
     height: "400px";
     margin: "0px 0px 0px 20px"
 }
+
+.dropdown {
+    width: 250px;
+}
+.li::placeholder{
+    color: black;
+}
+.dropdownContent{
+    display: flex;
+    justify-content: space-between;
+}
+.modalProperties{
+    width: 100px;
+    border-left: solid;
+    border-left-color: white;
+}
+.modalPropertiesOverflow{
+    display: flex;
+    overflow: scroll;
+}

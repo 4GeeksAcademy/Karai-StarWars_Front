@@ -12,8 +12,7 @@ const Navbar = () => {
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 <Link to="/" className="nav-link active" aria-current="page">
-                                    <p>Home</p>
-                                    {/* <img src="../../img/starwars.jpg" alt="Logo" /> */}
+                                    <img src="../../img/starwars.jpg" alt="Logo" />
                                 </Link>
                             </li>
                         </ul>
@@ -30,7 +29,7 @@ const Navbar = () => {
                                     Favorites
                                 </Link>
                                 <ul
-                                    className="dropdown-menu"
+                                    className={`dropdown-menu dropdown-menu-end ${styles.dropdown}`}
                                     aria-labelledby="navbarDropdown"
                                 >
                                     <Favorites />

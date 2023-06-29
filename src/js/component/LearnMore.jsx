@@ -17,18 +17,40 @@ const LearnMore = ({ activateModal, closeModal, character }) => {
                                 <div>
 
                                 </div>
-                                <div className="d-flex">
-                                    <div>
-                                        <p>Name</p>
-                                        <p>{character.name}</p>
-                                    </div>
-                                    <div>
-                                        <p>Height</p>
-                                        <p>{character.height}</p>
-                                    </div>
-                                    <div>
-                                        <p>Mass</p>
-                                        <p>{character.mass}</p>
+                                <div>
+                                    <div className={styles.modalPropertiesOverflow}>
+                                        <div className={styles.modalProperties}>
+                                            <p>Name</p>
+                                            <p>{character.name}</p>
+                                        </div>
+                                        <div className={styles.modalProperties}>
+                                            <p>Gender</p>
+                                            <p>{character.gender}</p>
+                                        </div>
+                                        <div className={styles.modalProperties}>
+                                            <p>Height</p>
+                                            <p>{character.height}</p>
+                                        </div>
+                                        <div className={styles.modalProperties}>
+                                            <p>Mass</p>
+                                            <p>{character.mass}</p>
+                                        </div>
+                                        <div className={styles.modalProperties}>
+                                            <p>Hair Color</p>
+                                            <p>{character.hair_color}</p>
+                                        </div>
+                                        <div className={styles.modalProperties}>
+                                            <p>Skin Color</p>
+                                            <p>{character.skin_color}</p>
+                                        </div>
+                                        <div className={styles.modalProperties}>
+                                            <p>Eye Color</p>
+                                            <p>{character.eye_color}</p>
+                                        </div>
+                                        <div className={styles.modalProperties}>
+                                            <p>Birth Year</p>
+                                            <p>{character.birth_year}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
