@@ -5,7 +5,7 @@ import { Context } from '../store/appContext'
 import styles from "./Styles.module.css"
 
 
-const CharacterCard = ({ character }) => {
+const CharacterCard = ({ character, uid }) => {
 
     const { sotre, actions } = useContext(Context)
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -20,13 +20,18 @@ const CharacterCard = ({ character }) => {
     return (
         <div>
             <div>
-                <div className="card" style={{
-                    width: "300px",
-                    height: "400px",
-                    margin: "0px 0px 0px 20px"
-                }}>
+                <div className={`card ${styles.cardsStyle}`}>
                     <div className="card-body">
-                        <img src={`https://starwars-visualguide.com/assets/img/characters/${character.uid}.jpg`} className="card-img-top" alt="..." />
+                        <img
+                            style={{
+                                objectFit: "cover",
+                                height: "240px",
+                                objectPosition: "top",
+                            }}
+                            src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`}
+                            className="card-img-top" 
+                            alt="..."
+                        />
                         <h5 className="card-title">{character.name}</h5>
                         <p className="card-text">Gender: {character.gender}</p>
                         <p className="card-text">Height: {character.height}</p>
@@ -43,6 +48,7 @@ const CharacterCard = ({ character }) => {
                     activateModal={isModalOpen}
                     closeModal={closeModal}
                     character={character}
+                    uid={uid}
                 />
             }
         </div>

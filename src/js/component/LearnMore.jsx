@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Styles.module.css"
 
-const LearnMore = ({ activateModal, closeModal, character }) => {
+const LearnMore = ({ activateModal, closeModal, character, uid }) => {
 
     return (
         <div>
@@ -14,15 +14,23 @@ const LearnMore = ({ activateModal, closeModal, character }) => {
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={closeModal}></button>
                             </div>
                             <div className="modal-body">
-                                <div>
-
+                                <div className="d-flex">
+                                    <div style={{ width: "50%"}}>
+                                        <img
+                                            style={{
+                                                objectFit: "cover",
+                                            }}
+                                            src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`}
+                                            className="card-img-top"
+                                            alt="..."
+                                        />
+                                    </div>
+                                    <div className="d-flex align-items-center flex-column">
+                                            <h3>{character.name}</h3>
+                                    </div>
                                 </div>
                                 <div>
                                     <div className={styles.modalPropertiesOverflow}>
-                                        <div className={styles.modalProperties}>
-                                            <p>Name</p>
-                                            <p>{character.name}</p>
-                                        </div>
                                         <div className={styles.modalProperties}>
                                             <p>Gender</p>
                                             <p>{character.gender}</p>

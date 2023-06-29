@@ -5,7 +5,7 @@ import { Context } from '../store/appContext'
 import styles from "./Styles.module.css"
 
 
-const PlanetsCard = ({ character }) => {
+const PlanetsCard = ({ starShip, uid }) => {
 
     const { sotre, actions } = useContext(Context)
 
@@ -21,19 +21,24 @@ const PlanetsCard = ({ character }) => {
     return (
         <div>
             <div>
-                <div className="card" style={{
-                    width: "300px",
-                    height: "400px",
-                    margin: "0px 0px 0px 20px"
-                }}>
+                <div className={`card ${styles.cardsStyleShips}`}>
                     <div className="card-body">
-                        <img src={`https://starwars-visualguide.com/assets/img/starships/${character.uid}.jpg`} className="card-img-top" alt="..." />
-                        <h5 className="card-title">{character.name}</h5>
-                        <p className="card-text">Model: {character.model}</p>
-                        <p className="card-text">Height: {character.height}</p>
+                        <img
+                            // style={{
+                            //     objectFit: "cover",
+                            //     height: "240px",
+                            //     objectPosition: "top",
+                            // }}
+                            src={`https://starwars-visualguide.com/assets/img/starships/${uid}.jpg`}
+                            className="card-img-top" 
+                            alt="..."
+                        />
+                        <h5 className="card-title">{starShip.name}</h5>
+                        <p className="card-text">Model: {starShip.model}</p>
+                        <p className="card-text">Height: {starShip.height}</p>
                         <div className="d-felx justify-content-between">
                             <button onClick={openModal} href="" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Learn More</button>
-                            <button onClick={() => actions.addFavorite(character.name)} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
+                            <button onClick={() => actions.addFavorite(starShip.name)} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
                         </div>
                     </div>
                 </div>
@@ -43,7 +48,7 @@ const PlanetsCard = ({ character }) => {
                 <LearnMore
                     activateModal={isModalOpen}
                     closeModal={closeModal}
-                    character={character}
+                    starShip={starShip}
                 />
             }
         </div>
