@@ -10,7 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             favoriteCharacters: [],
             favoritePlanets: [],
             favoriteStarShips: [],
-            favorites: ["No favorites, add one"],
+            favorites: ["No favorites yet"],
         },
         actions: {
             getPeople: async () => {
@@ -156,9 +156,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             addFavorite: async (name) => {
                 const store = getStore()
-                if (store.favorites[0] == "No favorites, add one") {
-                    await setStore({ ...store, favorites: [...store.favorites.shift()] });
-                    await setStore({ ...store, favorites: [...store.favorites, name] });
+                if (store.favorites[0] == "No favorites yet") {
+                    await setStore({ ...store, favorites: [] });
+                    await setStore({ ...store, favorites: [name] });
                 }else{
                     await setStore({ ...store, favorites: [...store.favorites, name] });
                 }
@@ -167,13 +167,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             deleteFavorite: async (index) => {
                 const store = getStore()
                 await setStore({ ...store, favorites: [store.favorites.filter((_, i) => i !== index)] })
-                // if (store.favorites.length == 0) {
-                //     await setStore({ ...store, favorites: ["No favorites, add one"] })
-                //   }
+                if (store.favorites.length == 0) {
+                    const {setFavoriteArray} = getActions()
+                    await setFavoriteArray()
+                  }
             },
-            setFavoriteArray: () => {
+            setFavoriteArray: async () => {
                 const store = getStore()
-                setStore({ ...store, favorites: ["No favorites, add one"] })
+                await setStore({ ...store, favorites: ["No favorites yet"] })
             }
 
         }

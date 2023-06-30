@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LearnMore from "./LearnMore.jsx"
+import LearnMoreShips from "./LearnMoreShips.jsx"
 import { useContext } from 'react'
 import { Context } from '../store/appContext'
 import styles from "./Styles.module.css"
@@ -22,7 +22,7 @@ const PlanetsCard = ({ starShip, uid }) => {
         <div>
             <div>
                 <div className={`card ${styles.cardsStyleShips}`}>
-                    <div className="card-body">
+                    <div className="card-body" style={{height: "auto"}}>
                         <img
                             // style={{
                             //     objectFit: "cover",
@@ -33,22 +33,23 @@ const PlanetsCard = ({ starShip, uid }) => {
                             className="card-img-top" 
                             alt="..."
                         />
-                        <h5 className="card-title">{starShip.name}</h5>
-                        <p className="card-text">Model: {starShip.model}</p>
-                        <p className="card-text">Height: {starShip.height}</p>
-                        <div className="d-felx justify-content-between">
+                        <h5 className="card-title" style={{marginTop: "10px", height: "40px"}}>{starShip.name}</h5>
+                        <p className="card-text" style={{ height: "35px"}}>Model: {starShip.model}</p>
+                        <p className="card-text">Crew: {starShip.crew}</p>
+                        <div className={styles.cardBtn}>
                             <button onClick={openModal} href="" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Learn More</button>
-                            <button onClick={() => actions.addFavorite(starShip.name)} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
+                            <button onClick={() => actions.addFavorite(starShip.name)} style={{backgroundColor: "transparent"}} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
                         </div>
                     </div>
                 </div>
             </div>
             {
                 isModalOpen &&
-                <LearnMore
+                <LearnMoreShips
                     activateModal={isModalOpen}
                     closeModal={closeModal}
                     starShip={starShip}
+                    uid={uid}
                 />
             }
         </div>

@@ -8,11 +8,11 @@ const Favorites = () => {
 
     const { store, actions } = useContext(Context)
 
-    useEffect(() => {
-        if (store.favorites.length === 0) {
-          actions.setFavoriteArray();
-        }
-      }, [store.favorites]);
+    // useEffect(() => {
+    //     if (store.favorites.length === 0) {
+    //       actions.setFavoriteArray();
+    //     }
+    //   }, [store.favorites]);
 
     return (
         <div>

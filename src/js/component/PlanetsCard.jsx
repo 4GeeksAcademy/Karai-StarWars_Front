@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LearnMore from "./LearnMore.jsx"
+import LearnMorePlanets from "./LearnMorePlanets.jsx"
 import { useContext } from 'react'
 import { Context } from '../store/appContext'
 import styles from "./Styles.module.css"
@@ -33,22 +33,23 @@ const PlanetsCard = ({ planets, uid }) => {
                             className="card-img-top"
                             alt="..."
                         />
-                        <h5 className="card-title">{planets.name}</h5>
-                        <p className="card-text">Gender: {planets.gender}</p>
-                        <p className="card-text">Height: {planets.height}</p>
-                        <div className="d-felx justify-content-between">
+                        <h5 className="card-title" style={{marginTop: "10px"}}>{planets.name}</h5>
+                        <p className="card-text">Diameter: {planets.diameter} km</p>
+                        <p className="card-text">Climate: {planets.climate}</p>
+                        <div className={styles.cardBtn}>
                             <button onClick={openModal} href="" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Learn More</button>
-                            <button onClick={() => actions.addFavorite(planets.name)} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
+                            <button onClick={() => actions.addFavorite(planets.name)} style={{backgroundColor: "transparent"}} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
                         </div>
                     </div>
                 </div>
             </div>
             {
                 isModalOpen &&
-                <LearnMore
+                <LearnMorePlanets
                     activateModal={isModalOpen}
                     closeModal={closeModal}
                     planets={planets}
+                    uid={uid}
                 />
             }
         </div>

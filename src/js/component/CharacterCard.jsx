@@ -32,12 +32,12 @@ const CharacterCard = ({ character, uid }) => {
                             className="card-img-top" 
                             alt="..."
                         />
-                        <h5 className="card-title">{character.name}</h5>
+                        <h5 className="card-title" style={{marginTop: "10px"}}>{character.name}</h5>
                         <p className="card-text">Gender: {character.gender}</p>
                         <p className="card-text">Height: {character.height}</p>
-                        <div className="d-felx justify-content-between">
+                        <div className={styles.cardBtn}>
                             <button onClick={openModal} href="" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Learn More</button>
-                            <button onClick={() => actions.addFavorite(character.name)} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
+                            <button onClick={() => actions.addFavorite(character.name)} style={{backgroundColor: "transparent"}} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
                         </div>
                     </div>
                 </div>

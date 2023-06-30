@@ -8,8 +8,26 @@
     background-color: transparent;
     backdrop-filter: blur(8px);
     width: 700px;
-    height: 700px;
+    height: auto;
   }
+.modalPlanet {
+    justify-content: center;
+    text-align: center;
+    color: white;
+    background-color: transparent;
+    backdrop-filter: blur(8px);
+    width: 700px;
+    height: auto;
+}
+.modalShip {
+    justify-content: center;
+    text-align: center;
+    color: white;
+    background-color: transparent;
+    backdrop-filter: blur(8px);
+    width: 700px;
+    height: auto;
+}
 .generalCardsDiv{
     width: 95%;
 }
@@ -33,18 +51,21 @@
     width: 240px;
     height: 400px;
     margin: 0px 0px 0px 40px;
-    color: rgb(247, 231, 7);
+    color: yellow;
 }
 .cardsStyleShips{
     background-color: transparent;
     width: 240px;
-    height: 350px;
+    height: auto;
     margin: 0px 0px 0px 40px;
-    color: rgb(247, 231, 7);
+    color: yellow;
 }
 
 .dropdown {
     width: 250px;
+    background-color: rgba(0, 0, 0, 0.549);
+    backdrop-filter: blur(10px);
+    color: yellow;
 }
 .li::placeholder{
     color: black;
@@ -52,13 +73,44 @@
 .dropdownContent{
     display: flex;
     justify-content: space-between;
+    margin: 10px 10px 10px 10px;
+
 }
 .modalProperties{
     width: 100px;
     border-left: solid;
     border-left-color: white;
 }
+.modalPropertiesShips{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: auto;
+    padding: 0px 10px 0px 10px;
+    border-left: solid;
+    border-left-color: white;
+}
+.modalPropertiesPlanet{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 0px 10px 0px 10px;
+    width: auto;
+    height: auto;
+    border-left: solid;
+    border-left-color: white;
+}
 .modalPropertiesOverflow{
     display: flex;
-    overflow: scroll;
+    justify-content: center;
+    text-align: center;
+    overflow-x: scroll;
+    margin-top: 20px;
+}
+.cardBtn{
+    display: flex;
+    justify-content: space-between;
+}
+.favoritesDeleteBtn{
+    margin: 0px;
 }

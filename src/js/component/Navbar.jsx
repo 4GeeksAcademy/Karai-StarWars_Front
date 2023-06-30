@@ -28,6 +28,7 @@ const Navbar = () => {
                                     role="button"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
+                                    style={{color: "yellow"}}
                                 >
                                     Favorites
                                 </Link>
