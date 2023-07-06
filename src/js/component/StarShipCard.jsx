@@ -5,18 +5,9 @@ import { Context } from '../store/appContext'
 import styles from "./Styles.module.css"
 
 
-const PlanetsCard = ({ starShip, uid }) => {
+const PlanetsCard = ({starShip}) => {
 
-    const { sotre, actions } = useContext(Context)
-
-    const [isModalOpen, setIsModalOpen] = useState(false)
-
-    const openModal = () => {
-        setIsModalOpen(true)
-    }
-    const closeModal = () => {
-        setIsModalOpen(false)
-    }
+    const { store, actions } = useContext(Context)
 
     return (
         <div>
@@ -24,33 +15,23 @@ const PlanetsCard = ({ starShip, uid }) => {
                 <div className={`card ${styles.cardsStyleShips}`}>
                     <div className="card-body" style={{height: "auto"}}>
                         <img
-                            // style={{
-                            //     objectFit: "cover",
-                            //     height: "240px",
-                            //     objectPosition: "top",
-                            // }}
-                            src={`https://starwars-visualguide.com/assets/img/starships/${uid}.jpg`}
+                            src={`https://starwars-visualguide.com/assets/img/starships/${starShip.result.uid}.jpg`}
                             className="card-img-top" 
                             alt="..."
                         />
-                        <h5 className="card-title" style={{marginTop: "10px", height: "40px"}}>{starShip.name}</h5>
-                        <p className="card-text" style={{ height: "35px"}}>Model: {starShip.model}</p>
-                        <p className="card-text">Crew: {starShip.crew}</p>
+                        <h5 className="card-title" style={{marginTop: "10px", height: "40px"}}>{starShip.result.properties.name}</h5>
+                        <p className="card-text" style={{ height: "35px"}}>Model: {starShip.result.properties.model}</p>
+                        <p className="card-text">Crew: {starShip.result.properties.crew}</p>
                         <div className={styles.cardBtn}>
-                            <button onClick={openModal} href="" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Learn More</button>
-                            <button onClick={() => actions.addFavorite(starShip.name)} style={{backgroundColor: "transparent"}} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
+                            <button onClick={() => actions.detailsToShowShips(starShip)} href="" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalShips">Learn More</button>
+                            <button onClick={() => actions.addFavorite(starShip)} style={{backgroundColor: "transparent"}} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
                         </div>
                     </div>
                 </div>
             </div>
             {
-                isModalOpen &&
-                <LearnMoreShips
-                    activateModal={isModalOpen}
-                    closeModal={closeModal}
-                    starShip={starShip}
-                    uid={uid}
-                />
+                store.isModalOpenShips &&
+                <LearnMoreShips/>
             }
         </div>
     )

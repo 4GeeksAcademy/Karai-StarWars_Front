@@ -5,17 +5,9 @@ import { Context } from '../store/appContext'
 import styles from "./Styles.module.css"
 
 
-const CharacterCard = ({ character, uid }) => {
+const CharacterCard = ({character}) => {
 
-    const { sotre, actions } = useContext(Context)
-    const [isModalOpen, setIsModalOpen] = useState(false)
-
-    const openModal = () => {
-        setIsModalOpen(true)
-    }
-    const closeModal = () => {
-        setIsModalOpen(false)
-    }
+    const { store, actions } = useContext(Context)
 
     return (
         <div>
@@ -28,28 +20,23 @@ const CharacterCard = ({ character, uid }) => {
                                 height: "240px",
                                 objectPosition: "top",
                             }}
-                            src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`}
+                            src={`https://starwars-visualguide.com/assets/img/characters/${character.result.uid}.jpg`}
                             className="card-img-top" 
                             alt="..."
                         />
-                        <h5 className="card-title" style={{marginTop: "10px"}}>{character.name}</h5>
-                        <p className="card-text">Gender: {character.gender}</p>
-                        <p className="card-text">Height: {character.height}</p>
+                        <h5 className="card-title" style={{marginTop: "10px"}}>{character.result.properties.name}</h5>
+                        <p className="card-text">Gender: {character.result.properties.gender}</p>
+                        <p className="card-text">Height: {character.result.properties.height}</p>
                         <div className={styles.cardBtn}>
-                            <button onClick={openModal} href="" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Learn More</button>
-                            <button onClick={() => actions.addFavorite(character.name)} style={{backgroundColor: "transparent"}} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
+                            <button onClick={() => actions.detailsToShow(character)} href="" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalCharacters">Learn More</button>
+                            <button onClick={() => actions.addFavorite(character)} style={{backgroundColor: "transparent"}} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
                         </div>
                     </div>
                 </div>
             </div>
             {
-                isModalOpen &&
-                <LearnMore
-                    activateModal={isModalOpen}
-                    closeModal={closeModal}
-                    character={character}
-                    uid={uid}
-                />
+                store.isModalOpen &&
+                <LearnMore/>
             }
         </div>
     )

@@ -7,25 +7,22 @@ import styles from "../component/Styles.module.css"
 import PlanetsLetter from "../../img/planets.png"
 import CharactersLetter from "../../img/characters.png"
 import StarshipLetter from "../../img/starship.png"
+import LearnMore from "../component/LearnMore.jsx";
 
 const Home = () => {
 
 	const { store, actions } = useContext(Context);
 
 	useEffect(() => {
-		if (store.characters < 1) {
-			actions.getPeople()
-		}
-	}, [])
-	useEffect(() => {
-		if (store.planetsProperties < 1) {
-			actions.getPlanets()
-		}
-	}, [])
-	useEffect(() => {
-		if (store.starShipsProperties < 1) {
-			actions.getStarShips()
-		}
+		// if (store.characters < 1) {
+		// 	actions.getPeople()
+		// }
+		// if (store.planetsProperties < 1) {
+		// 	actions.getPlanets()
+		// }
+		// if (store.starShipsProperties < 1) {
+		// 	actions.getStarShips()
+		// }
 	}, [])
 
 	return (
@@ -43,8 +40,7 @@ const Home = () => {
 						store.characters.map((characters, index) => (
 							<CharacterCard
 								key={index}
-								character={characters.result.properties}
-								uid={characters.result.uid}
+								character={characters}
 							/>
 						))
 					}
@@ -62,8 +58,7 @@ const Home = () => {
 					store.planetsProperties.map((planets, index) => (
 						<PlanetCard
 							key={index}
-							planets={planets.result.properties}
-							uid={planets.result.uid}
+							planets={planets}
 						/>
 					))
 				}
@@ -80,8 +75,7 @@ const Home = () => {
 					store.starShipsProperties.map((ships, index) => (
 						<StarShipCard
 							key={index}
-							starShip={ships.result.properties}
-							uid={ships.result.uid}
+							starShip={ships}
 						/>
 					))
 				}

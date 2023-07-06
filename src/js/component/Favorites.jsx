@@ -1,6 +1,7 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useContext } from 'react'
 import { Context } from '../store/appContext'
+import LearnMore from "./LearnMore.jsx"
 import styles from "../component/Styles.module.css";
 
 
@@ -17,30 +18,28 @@ const Favorites = () => {
     return (
         <div>
             <div>
-                {/* <p>Characters</p>
-                {sotre.favoriteCharacters.map((character, index) => {
-                    return (
-                        <li key={index} className={styles.li}>
-                            {character}
-                            <i
-                                onClick={() => actions.deleteFavorite("Characters",index)}
-                                className="fa-solid fa-rectangle-xmark mt-1">
-                            </i>
-                        </li>
-                    )
-                })} */}
-                {store.favorites.map((element, index) => {
-                    return (
-                        <li key={index} className={styles.dropdownContent}>
+                {
+                    store.favorites.length > 0 ? (
+                        store.favorites.map((element, index) => (
 
-                            {element}
-                            <i
-                                onClick={() => actions.deleteFavorite(index)}
-                                className="fa-solid fa-rectangle-xmark mt-1">
-                            </i>
-                        </li>
+                            <li key={index} className={styles.dropdownContent}>
+                                {element.result?.properties?.name}
+                                {/* <p onClick={() => actions.detailsToShow(element)}>{element.result?.properties?.name}</p> */}
+                                <i
+                                    onClick={() => actions.deleteFavorite(element.result.uid)}
+                                    className="fa-solid fa-rectangle-xmark mt-1">
+                                </i>
+                            </li>
+                        )
+                        )
+                    ) : (
+                        <p>No favorites yet</p>
                     )
-                })}
+                }
+                {/* {
+                    store.isModalOpen &&
+                    <LearnMore />
+                } */}
             </div>
         </div>
     )

@@ -7,10 +7,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             planetsProperties: [],
             starShips: [],
             starShipsProperties: [],
-            favoriteCharacters: [],
-            favoritePlanets: [],
-            favoriteStarShips: [],
-            favorites: ["No favorites yet"],
+            favorites: [],
+            currentDetailObject: {},
+            currentDetailObjectPlanets: {},
+            currentDetailObjectShips: {},
+            isModalOpen: false,
+            isModalOpenPlanets: false,
+            isModalOpenShips: false
         },
         actions: {
             getPeople: async () => {
@@ -154,28 +157,39 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-            addFavorite: async (name) => {
+            addFavorite: async (character) => {
                 const store = getStore()
-                if (store.favorites[0] == "No favorites yet") {
-                    await setStore({ ...store, favorites: [] });
-                    await setStore({ ...store, favorites: [name] });
-                }else{
-                    await setStore({ ...store, favorites: [...store.favorites, name] });
-                }
+                setStore({ ...store, favorites: [...store.favorites, character] });
             },
 
-            deleteFavorite: async (index) => {
+            deleteFavorite: async (uid) => {
                 const store = getStore()
-                await setStore({ ...store, favorites: [store.favorites.filter((_, i) => i !== index)] })
-                if (store.favorites.length == 0) {
-                    const {setFavoriteArray} = getActions()
-                    await setFavoriteArray()
-                  }
+                const filteredList = store.favorites.filter((element) => element.result.uid !== uid)
+                setStore({ ...store, favorites: filteredList })
             },
-            setFavoriteArray: async () => {
+            
+            detailsToShow: async (element) => {
+                console.log("entre a detail", element)
                 const store = getStore()
-                await setStore({ ...store, favorites: ["No favorites yet"] })
-            }
+                await setStore({...store, currentDetailObject: element})
+                await setStore({...store, isModalOpen: true})
+            },
+            detailsToShowPlanets: async (element) => {
+                console.log("entre a detail", element)
+                const store = getStore()
+                await setStore({...store, currentDetailObjectPlanets: element})
+                await setStore({...store, isModalOpenPlanets: true})
+            },
+            detailsToShowShips: async (element) => {
+                console.log("entre a detail", element)
+                const store = getStore()
+                await setStore({...store, currentDetailObjectShips: element})
+                await setStore({...store, isModalOpenShips: true})
+            },
+            closeModal: () => {
+                const store = getStore()
+                setStore({...store, isModalOpen: false})
+            } 
 
         }
     };

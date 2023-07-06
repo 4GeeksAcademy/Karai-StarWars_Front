@@ -5,18 +5,9 @@ import { Context } from '../store/appContext'
 import styles from "./Styles.module.css"
 
 
-const PlanetsCard = ({ planets, uid }) => {
+const PlanetsCard = ({planets}) => {
 
-    const { sotre, actions } = useContext(Context)
-
-    const [isModalOpen, setIsModalOpen] = useState(false)
-
-    const openModal = () => {
-        setIsModalOpen(true)
-    }
-    const closeModal = () => {
-        setIsModalOpen(false)
-    }
+    const { store, actions } = useContext(Context)
 
     return (
         <div>
@@ -29,28 +20,23 @@ const PlanetsCard = ({ planets, uid }) => {
                             //     height: "240px",
                             //     objectPosition: "top",
                             // }}
-                            src={`https://starwars-visualguide.com/assets/img/planets/${uid}.jpg`}
+                            src={`https://starwars-visualguide.com/assets/img/planets/${planets.result.uid}.jpg`}
                             className="card-img-top"
                             alt="..."
                         />
-                        <h5 className="card-title" style={{marginTop: "10px"}}>{planets.name}</h5>
-                        <p className="card-text">Diameter: {planets.diameter} km</p>
-                        <p className="card-text">Climate: {planets.climate}</p>
+                        <h5 className="card-title" style={{marginTop: "10px"}}>{planets.result.properties.name}</h5>
+                        <p className="card-text">Diameter: {planets.result.properties.diameter} km</p>
+                        <p className="card-text">Climate: {planets.result.properties.climate}</p>
                         <div className={styles.cardBtn}>
-                            <button onClick={openModal} href="" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Learn More</button>
-                            <button onClick={() => actions.addFavorite(planets.name)} style={{backgroundColor: "transparent"}} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
+                        <button onClick={() => actions.detailsToShowPlanets(planets)} href="" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalPlanets">Learn More</button>                            
+                        <button onClick={() => actions.addFavorite(planets)} style={{backgroundColor: "transparent"}} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
                         </div>
                     </div>
                 </div>
             </div>
             {
-                isModalOpen &&
-                <LearnMorePlanets
-                    activateModal={isModalOpen}
-                    closeModal={closeModal}
-                    planets={planets}
-                    uid={uid}
-                />
+                store.isModalOpenPlanets &&
+                <LearnMorePlanets/>
             }
         </div>
     )
