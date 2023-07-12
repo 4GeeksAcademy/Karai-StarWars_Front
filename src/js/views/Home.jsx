@@ -7,23 +7,21 @@ import styles from "../component/Styles.module.css"
 import PlanetsLetter from "../../img/planets.png"
 import CharactersLetter from "../../img/characters.png"
 import StarshipLetter from "../../img/starship.png"
+
 import LearnMore from "../component/LearnMore.jsx";
 
 const Home = () => {
 
 	const { store, actions } = useContext(Context);
-
-	useEffect(() => {
-		// if (store.characters < 1) {
-		// 	actions.getPeople()
-		// }
-		// if (store.planetsProperties < 1) {
-		// 	actions.getPlanets()
-		// }
-		// if (store.starShipsProperties < 1) {
-		// 	actions.getStarShips()
-		// }
-	}, [])
+	
+	window.onload = function() {
+		const body = document.body;
+		const fullPageWidth = body.scrollWidth;
+		const fullPageHeight = body.scrollHeight;
+	  
+		console.log("Ancho completo de la página:", fullPageWidth);
+		console.log("Alto completo de la página:", fullPageHeight);
+	  };
 
 	return (
 		<div>

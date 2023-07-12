@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Favorites from "./Favorites.jsx"
 import styles from "../component/Styles.module.css";
+import favoriteLetter from "../../img/FAVORITES.png"
 
 const Navbar = () => {
     return (
@@ -28,9 +29,13 @@ const Navbar = () => {
                                     role="button"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
-                                    style={{color: "yellow"}}
+                                    style={{ color: "yellow" }}
                                 >
-                                    Favorites
+                                    <img
+                                        src={favoriteLetter}
+                                        alt=""
+                                        style={{ width: "130px" }}
+                                    />
                                 </Link>
                                 <ul
                                     className={`dropdown-menu dropdown-menu-end ${styles.dropdown}`}

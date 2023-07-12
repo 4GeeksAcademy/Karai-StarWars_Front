@@ -5,6 +5,7 @@ import ScrollToTop from "./component/scrollToTop";
 import Home from "./views/Home.jsx"
 import Navbar from "./component/Navbar.jsx"
 import injectContext from "./store/appContext";
+import Fondo from "../img/fondo.png"
 
 //create your first component
 const Layout = () => {
@@ -13,7 +14,12 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div>
+		
+		<div style={{
+			backgroundImage: `url(${Fondo})`,
+			backgroundRepeat: 'no-repeat',
+			backgroundSize: 'contain',
+		}}>
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbar />

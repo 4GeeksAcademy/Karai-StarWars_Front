@@ -1,21 +1,27 @@
+/* body {
+    background-image: url('https://s0.smartresize.com/wallpaper/237/137/HD-wallpaper-star-wars-logo-darth-vader-disney-episode-logo-luke-skywalker-star-star-wars-the-force-awakens.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+} */
 .titles{
     display: flex;
     /* justify-content: center; */
     margin: 20px 0px 20px 100px;
 }
 .modal {
+    justify-content: center;
+    text-align: center;
     color: white;
-    background-color: transparent;
-    backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.139);
+    border: none;
     width: 700px;
     height: auto;
-  }
+}
 .modalPlanet {
     justify-content: center;
     text-align: center;
     color: white;
-    background-color: transparent;
-    backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.139);
     width: 700px;
     height: auto;
 }
@@ -23,8 +29,7 @@
     justify-content: center;
     text-align: center;
     color: white;
-    background-color: transparent;
-    backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.139);
     width: 700px;
     height: auto;
 }
@@ -47,14 +52,27 @@
     width: 1px;
   }
 .cardsStyle{
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.125);
+    backdrop-filter: blur(2px);
+    border: none;
     width: 240px;
-    height: 400px;
+    height: auto;
+    margin: 0px 0px 0px 40px;
+    color: yellow;
+}
+.cardsStylePlanets{
+    background-color: rgba(0, 0, 0, 0.125);
+    backdrop-filter: blur(2px);
+    border: none;
+    width: 240px;
+    height: auto;
     margin: 0px 0px 0px 40px;
     color: yellow;
 }
 .cardsStyleShips{
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.125);
+    backdrop-filter: blur(2px);
+    border: none;
     width: 240px;
     height: auto;
     margin: 0px 0px 0px 40px;
@@ -63,8 +81,8 @@
 
 .dropdown {
     width: 250px;
-    background-color: rgba(0, 0, 0, 0.549);
-    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.313);
+    backdrop-filter: blur(5px);
     color: yellow;
 }
 .li::placeholder{
@@ -91,26 +109,36 @@
     border-left-color: white;
 }
 .modalPropertiesPlanet{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+    width: 1000px;
     padding: 0px 10px 0px 10px;
-    width: auto;
-    height: auto;
     border-left: solid;
     border-left-color: white;
 }
 .modalPropertiesOverflow{
     display: flex;
-    justify-content: center;
-    text-align: center;
-    overflow-x: scroll;
+    overflow-x: auto;
     margin-top: 20px;
 }
 .cardBtn{
     display: flex;
     justify-content: space-between;
 }
-.favoritesDeleteBtn{
-    margin: 0px;
+
+.favoritesDeleteBtn:hover{
+    cursor: pointer;
+    color: rgb(255, 213, 0);
+}
+
+.favoritos{
+    text-decoration: underline;
+}
+.favoritos:hover{
+    cursor: pointer;
+    color: rgb(255, 213, 0);
+}
+.learnMore{
+    border: 1px 0px 0px 10px solid;
+    border-color: grey;
+    background-color: rgba(0, 0, 0, 0.327);
+    color: yellow;
 }

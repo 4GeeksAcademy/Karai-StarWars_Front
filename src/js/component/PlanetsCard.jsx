@@ -12,32 +12,30 @@ const PlanetsCard = ({planets}) => {
     return (
         <div>
             <div>
-                <div className={`card ${styles.cardsStyle}`}>
+                <div className={`card ${styles.cardsStylePlanets}`}>
                     <div className="card-body">
                         <img
-                            // style={{
-                            //     objectFit: "cover",
-                            //     height: "240px",
-                            //     objectPosition: "top",
-                            // }}
                             src={`https://starwars-visualguide.com/assets/img/planets/${planets.result.uid}.jpg`}
                             className="card-img-top"
                             alt="..."
+                            onError={(e) => {
+                                const uid = parseInt(planets.result.uid, 10);
+                                const fallbackUid = uid + 10;
+                                e.target.src = `https://starwars-visualguide.com/assets/img/planets/${fallbackUid}.jpg`;
+                                e.target.onerror = null;
+                              }}
                         />
                         <h5 className="card-title" style={{marginTop: "10px"}}>{planets.result.properties.name}</h5>
                         <p className="card-text">Diameter: {planets.result.properties.diameter} km</p>
                         <p className="card-text">Climate: {planets.result.properties.climate}</p>
                         <div className={styles.cardBtn}>
-                        <button onClick={() => actions.detailsToShowPlanets(planets)} href="" className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalPlanets">Learn More</button>                            
-                        <button onClick={() => actions.addFavorite(planets)} style={{backgroundColor: "transparent"}} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
+                        <button onClick={() => actions.detailsToShowPlanets(planets)} className={styles.learnMore}>Learn More</button>                            
+                        <button onClick={() => actions.addFavoritePlanet(planets)} style={{backgroundColor: "transparent"}} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
                         </div>
                     </div>
                 </div>
             </div>
-            {
-                store.isModalOpenPlanets &&
                 <LearnMorePlanets/>
-            }
         </div>
     )
 }

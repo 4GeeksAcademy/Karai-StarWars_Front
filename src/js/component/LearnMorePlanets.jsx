@@ -7,19 +7,31 @@ const LearnMorePlanets = () => {
 
     const { store, actions } = useContext(Context)
 
+    if (!store.isModalOpenPlanets) {
+        return (
+            <div>
+
+            </div>
+        )
+    }
+
     return (
         <div>
-            {store.isModalOpenPlanets &&
-                <div className="modal fade" id="modalPlanets" data-bs-backdrop="static" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered">
+            <div
+                className={`modal ${store.isModalOpenPlanets ? 'show' : ''}`}
+                tabIndex="-1"
+                style={{ display: store.isModalOpenPlanets ? 'block' : 'none' }}
+            >
+                    <div className="modal-dialog modal-dialog-centered" style={{marginRight: '570px'}}>
                         <div className={`modal-content ${styles.modalPlanet}`}>
                             <div className="modal-header">
                                 <h1 className="modal-title fs-5" id="staticBackdropLabel">Specific Information</h1>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => actions.closeModal()}></button>
                             </div>
                             <div className="modal-body">
+                            <div className="row">
                                 <div className="d-flex">
-                                    <div style={{ width: "50%"}}>
+                                    <div className="col-md-6">
                                         <img
                                             style={{
                                                 objectFit: "cover",
@@ -27,15 +39,26 @@ const LearnMorePlanets = () => {
                                             src={`https://starwars-visualguide.com/assets/img/planets/${store.currentDetailObjectPlanets.result.uid}.jpg`}
                                             className="card-img-top"
                                             alt="..."
+                                            onError={(e) => {
+                                                const uid = parseInt(store.currentDetailObjectPlanets.result.uid, 10);
+                                                const fallbackUid = uid + 10;
+                                                e.target.src = `https://starwars-visualguide.com/assets/img/planets/${fallbackUid}.jpg`;
+                                                e.target.onerror = null;
+                                              }}
                                         />
                                     </div>
-                                    <div className="d-flex align-items-center flex-column justifiy-content-center">
+                                    <div className="col-md-6 ">
+                                        <div className="d-flex align-items-center flex-column justifiy-content-center">
                                             <h3>{store.currentDetailObjectPlanets.result.properties.name}</h3>
+                                            <p style={{marginLeft: '25px'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                                        </div>
                                     </div>
+
+                                </div>
                                 </div>
                                 <div>
                                     <div className={styles.modalPropertiesOverflow}>
-                                        <div style={{width: "100px"}}>
+                                        <div className={styles.modalPropertiesPlanet}>
                                             <p>Diameter</p>
                                             <p>{store.currentDetailObjectPlanets.result.properties.diameter}</p>
                                         </div>
@@ -78,8 +101,7 @@ const LearnMorePlanets = () => {
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
     );
 }
 
