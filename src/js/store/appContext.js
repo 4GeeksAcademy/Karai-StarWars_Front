@@ -22,15 +22,15 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
-			if (state.store.characters < 1) {
-				state.actions.getPeople()
-			}
-			if (state.store.planetsProperties < 1) {
-				state.actions.getPlanets()
-			}
-			if (state.store.starShipsProperties < 1) {
-				state.actions.getStarShips()
-			}
+			// if (state.store.characters < 1) {
+			// 	state.actions.getPeople()
+			// }
+			// if (state.store.planetsProperties < 1) {
+			// 	state.actions.getPlanets()
+			// }
+			// if (state.store.starShipsProperties < 1) {
+			// 	state.actions.getStarShips()
+			// }
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,
