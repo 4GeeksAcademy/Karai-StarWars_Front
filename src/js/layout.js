@@ -4,8 +4,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import Home from "./views/Home.jsx"
+import CreateAccount from "./component/CreateAccount.jsx";
+import NotLoad from './component/NotLoad.jsx'
 import Navbar from "./component/Navbar.jsx"
-import NotLoad from "./component/NotLoad.jsx"
 import injectContext from "./store/appContext";
 import Fondo from "../img/fondo.png"
 
@@ -20,20 +21,9 @@ const Layout = () => {
 	const [isLoad, setIsLoad] = useState(false)
 
 	useEffect(() => {
-		const delay = 5000;
-		const timer = setTimeout(() => {
-
-			actions.getPeople();
-			actions.getPlanets();
-			actions.getStarShips();
-
-
-			setIsLoad(true);
-		}, delay);
-
-		return () => {
-			clearTimeout(timer); // Limpia el temporizador para evitar que se ejecute después del desmontaje del componente
-		};
+		actions.getPeople();
+		actions.getPlanets();
+		actions.getStarShips();
 	}, []);
 
 	return (
@@ -54,6 +44,8 @@ const Layout = () => {
 							<Navbar />
 							<Routes>
 								<Route path="/" element={<Home />} />
+								<Route path='/Createaccount' element={<CreateAccount />} />
+								<Route path='/Login' element={<NotLoad />} />
 								<Route path="*" element={<h1>Not found!</h1>} />
 							</Routes>
 						</ScrollToTop>

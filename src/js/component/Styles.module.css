@@ -160,6 +160,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 400px;
+    flex-direction: column;
+    padding-bottom: 450px;
 
+}
+
+.loginInputs {
+    background-color: transparent;
+    backdrop-filter: blur(2px);
+    color: #f8da2d;
+    border: solid #f8da2d;
+    border-width: 1px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.loginInputs::placeholder{
+    color: #f8da2d;
 }
