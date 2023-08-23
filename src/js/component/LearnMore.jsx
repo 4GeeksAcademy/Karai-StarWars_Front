@@ -36,14 +36,17 @@ const LearnMore = () => {
                                                 style={{
                                                     objectFit: "cover",
                                                 }}
-                                                src={`https://starwars-visualguide.com/assets/img/characters/${store.currentDetailObject.result.uid}.jpg`}
+                                                src={`https://starwars-visualguide.com/assets/img/characters/${store.currentDetailObject.id}.jpg`}
                                                 className="card-img-top"
                                                 alt="..."
+                                                onError={(e) => {
+                                                    e.target.src = `https://starwars-visualguide.com/assets/img/characters/81.jpg`;
+                                                }}
                                             />
                                     </div>
                                     <div className="col-md-6 ">
                                         <div className="d-flex align-items-center flex-column justifiy-content-center">
-                                            <h3>{store.currentDetailObject.result.properties.name}</h3>
+                                            <h3>{store.currentDetailObject.name}</h3>
                                             <p style={{marginLeft: '25px'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
                                         </div>
                                     </div>
@@ -53,31 +56,31 @@ const LearnMore = () => {
                                 <div className={styles.modalPropertiesOverflow}>
                                     <div style={{ width: "100px" }}>
                                         <p>Gender</p>
-                                        <p>{store.currentDetailObject.result.properties.gender}</p>
+                                        <p>{store.currentDetailObject.gender}</p>
                                     </div>
                                     <div className={styles.modalProperties}>
                                         <p>Height</p>
-                                        <p>{store.currentDetailObject.result.properties.height}</p>
+                                        <p>{store.currentDetailObject.height}</p>
                                     </div>
                                     <div className={styles.modalProperties}>
                                         <p>Mass</p>
-                                        <p>{store.currentDetailObject.result.properties.mass}</p>
+                                        <p>{store.currentDetailObject.mass}</p>
                                     </div>
                                     <div className={styles.modalProperties}>
                                         <p>Hair Color</p>
-                                        <p>{store.currentDetailObject.result.properties.hair_color}</p>
+                                        <p>{store.currentDetailObject.hair_color}</p>
                                     </div>
                                     <div className={styles.modalProperties}>
                                         <p>Skin Color</p>
-                                        <p>{store.currentDetailObject.result.properties.skin_color}</p>
+                                        <p>{store.currentDetailObject.skin_color}</p>
                                     </div>
                                     <div className={styles.modalProperties}>
                                         <p>Eye Color</p>
-                                        <p>{store.currentDetailObject.result.properties.eye_color}</p>
+                                        <p>{store.currentDetailObject.eye_color}</p>
                                     </div>
                                     <div className={styles.modalProperties}>
                                         <p>Birth Year</p>
-                                        <p>{store.currentDetailObject.result.properties.birth_year}</p>
+                                        <p>{store.currentDetailObject.birth_year}</p>
                                     </div>
                                 </div>
                             </div>

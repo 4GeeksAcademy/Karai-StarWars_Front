@@ -5,7 +5,7 @@ import { Context } from '../store/appContext'
 import styles from "./Styles.module.css"
 
 
-const PlanetsCard = ({starShip}) => {
+const PlanetsCard = ({starship}) => {
 
     const { store, actions } = useContext(Context)
 
@@ -15,22 +15,19 @@ const PlanetsCard = ({starShip}) => {
                 <div className={`card ${styles.cardsStyleShips}`}>
                     <div className="card-body" style={{height: "auto"}}>
                         <img
-                            src={`https://starwars-visualguide.com/assets/img/starships/${starShip.result.uid}.jpg`}
+                            src={`https://starwars-visualguide.com/assets/img/starships/${starship.id}.jpg`}
                             className="card-img-top" 
                             alt="..."
                             onError={(e) => {
-                                const uid = parseInt(starShip.result.uid, 10);
-                                const fallbackUid = uid + 10;
-                                e.target.src = `https://starwars-visualguide.com/assets/img/starships/${fallbackUid}.jpg`;
-                                e.target.onerror = null;
+                                e.target.src = `https://starwars-visualguide.com/assets/img/starships/40.jpg`;
                               }}
                         />
-                        <h5 className="card-title" style={{marginTop: "10px", height: "40px"}}>{starShip.result.properties.name}</h5>
-                        <p className="card-text" style={{ height: "35px"}}>Model: {starShip.result.properties.model}</p>
-                        <p className="card-text">Crew: {starShip.result.properties.crew}</p>
+                        <h5 className="card-title" style={{marginTop: "10px", height: "40px"}}>{starship.name}</h5>
+                        <p className="card-text" style={{ height: "35px"}}>Model: {starship.model}</p>
+                        <p className="card-text">Crew: {starship.crew}</p>
                         <div className={styles.cardBtn}>
-                            <button onClick={() => actions.detailsToShowShips(starShip)} className={styles.learnMore}>Learn More</button>
-                            <button onClick={() => actions.addFavoriteShip(starShip)} style={{backgroundColor: "transparent"}} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
+                            <button onClick={() => actions.detailsToShowShips(starship)} className={styles.learnMore}>Learn More</button>
+                            <button onClick={() => actions.addFavoriteShip(starship)} style={{backgroundColor: "transparent"}} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>
                         </div>
                     </div>
                 </div>

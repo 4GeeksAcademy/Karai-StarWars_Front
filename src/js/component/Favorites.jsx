@@ -23,20 +23,21 @@ const Favorites = () => {
                     />
                 </div>
                 {
-                    store.favoriteCharacters.length > 0 ? (
-                        store.favoriteCharacters.map((element, index) => (
-
-                            <li key={index} className={styles.dropdownContent}>
-                                <p className={styles.favoritos} onClick={() => actions.detailsToShow(element)}>{element.result?.properties?.name}</p>
-                                <i
-                                    onClick={() => actions.deleteFavoriteCharacter(element.result.uid)}
-                                    className={`fa-solid fa-rectangle-xmark mt-1 ${styles.favoritesDeleteBtn}`}>
-                                </i>
-                            </li>
-                        )
-                        )
+                    store.favoriteCharactersIds.length > 0 ? (
+                        store.favoriteCharactersIds.map((element, index) => {
+                            const character = store.characters.find((character) => character.id === element);
+                            return (
+                                <li key={index} className={styles.dropdownContent}>
+                                    <p className={styles.favoritos} onClick={() => actions.detailsToShow(character)}>{character.name}</p>
+                                    <i
+                                        onClick={() => actions.deleteFavoriteCharacter(character)}
+                                        className={`fa-solid fa-rectangle-xmark mt-1 ${styles.favoritesDeleteBtn}`}>
+                                    </i>
+                                </li>
+                            )
+                        })
                     ) : (
-                        <p style={{margin: '10px 10px 10px 10px'}}>No favorite characters yet</p>
+                        <p style={{ margin: '10px 10px 10px 10px' }}>No favorite characters yet</p>
                     )
                 }
                 <div>
@@ -47,45 +48,49 @@ const Favorites = () => {
                     />
                 </div>
                 {
-                    store.favoritePlanets.length > 0 ? (
-                        store.favoritePlanets.map((element, index) => (
+                    store.favoritePlanetsIds.length > 0 ? (
+                        store.favoritePlanetsIds.map((element, index) => {
 
-                            <li key={index} className={styles.dropdownContent}>
-                                <p className={styles.favoritos} onClick={() => actions.detailsToShowPlanets(element)}>{element.result?.properties?.name}</p>
-                                <i
-                                    onClick={() => actions.deleteFavoritePlanet(element.result.uid)}
-                                    className={`fa-solid fa-rectangle-xmark mt-1 ${styles.favoritesDeleteBtn}`}>
-                                </i>
-                            </li>
-                        )
-                        )
+                            const planet = store.planets.find((planet) => planet.id === element);
+
+                            return (
+                                <li key={index} className={styles.dropdownContent}>
+                                    <p className={styles.favoritos} onClick={() => actions.detailsToShowPlanets(planet)}>{planet.name}</p>
+                                    <i
+                                        onClick={() => actions.deleteFavoritePlanet(planet)}
+                                        className={`fa-solid fa-rectangle-xmark mt-1 ${styles.favoritesDeleteBtn}`}>
+                                    </i>
+                                </li>
+                            )
+                        })
                     ) : (
-                        <p style={{margin: '10px 10px 10px 10px'}}>No favorite planets yet</p>
+                        <p style={{ margin: '10px 10px 10px 10px' }}>No favorite planets yet</p>
                     )
                 }
                 <div>
-                <img
-					src={StarshipLetter}
-					alt=""
-					style={{ width: "100px" }}
-				/>
+                    <img
+                        src={StarshipLetter}
+                        alt=""
+                        style={{ width: "100px" }}
+                    />
                 </div>
                 {
-                    store.favoriteShips.length > 0 ? (
-                        store.favoriteShips.map((element, index) => (
+                    store.favoriteShipsIds.length > 0 ? (
+                        store.favoriteShipsIds.map((element, index) => {
 
-                            <li key={index} className={styles.dropdownContent}>
-
-                                <p className={styles.favoritos} onClick={() => actions.detailsToShowShips(element)}>{element.result?.properties?.name}</p>
-                                <i
-                                    onClick={() => actions.deleteFavoriteShip(element.result.uid)}
-                                    className={`fa-solid fa-rectangle-xmark mt-1 ${styles.favoritesDeleteBtn}`}>
-                                </i>
-                            </li>
-                        )
-                        )
+                            const starship = store.starships.find((starship) => starship.id === element);
+                            return (
+                                <li key={index} className={styles.dropdownContent}>
+                                    <p className={styles.favoritos} onClick={() => actions.detailsToShowShips(starship)}>{starship.name}</p>
+                                    <i
+                                        onClick={() => actions.deleteFavoriteShip(starship)}
+                                        className={`fa-solid fa-rectangle-xmark mt-1 ${styles.favoritesDeleteBtn}`}>
+                                    </i>
+                                </li>
+                            )
+                        })
                     ) : (
-                        <p style={{margin: '10px 10px 10px 10px'}}>No favorite starships yet</p>
+                        <p style={{ margin: '10px 10px 10px 10px' }}>No favorite StarShips yet</p>
                     )
                 }
 

@@ -36,20 +36,17 @@ const LearnMorePlanets = () => {
                                             style={{
                                                 objectFit: "cover",
                                             }}
-                                            src={`https://starwars-visualguide.com/assets/img/planets/${store.currentDetailObjectPlanets.result.uid}.jpg`}
+                                            src={`https://starwars-visualguide.com/assets/img/planets/${store.currentDetailObjectPlanets.id}.jpg`}
                                             className="card-img-top"
                                             alt="..."
                                             onError={(e) => {
-                                                const uid = parseInt(store.currentDetailObjectPlanets.result.uid, 10);
-                                                const fallbackUid = uid + 10;
-                                                e.target.src = `https://starwars-visualguide.com/assets/img/planets/${fallbackUid}.jpg`;
-                                                e.target.onerror = null;
+                                                e.target.src = `https://starwars-visualguide.com/assets/img/planets/18.jpg`;
                                               }}
                                         />
                                     </div>
                                     <div className="col-md-6 ">
                                         <div className="d-flex align-items-center flex-column justifiy-content-center">
-                                            <h3>{store.currentDetailObjectPlanets.result.properties.name}</h3>
+                                            <h3>{store.currentDetailObjectPlanets.name}</h3>
                                             <p style={{marginLeft: '25px'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
                                         </div>
                                     </div>
@@ -60,35 +57,35 @@ const LearnMorePlanets = () => {
                                     <div className={styles.modalPropertiesOverflow}>
                                         <div className={styles.modalPropertiesPlanet}>
                                             <p>Diameter</p>
-                                            <p>{store.currentDetailObjectPlanets.result.properties.diameter}</p>
+                                            <p>{store.currentDetailObjectPlanets.diameter}</p>
                                         </div>
                                         <div className={styles.modalPropertiesPlanet}>
                                             <p>Rotation Period</p>
-                                            <p>{store.currentDetailObjectPlanets.result.properties.rotation_period}</p>
+                                            <p>{store.currentDetailObjectPlanets.rotation_period}</p>
                                         </div>
                                         <div className={styles.modalPropertiesPlanet}>
                                             <p>Orbital Period</p>
-                                            <p>{store.currentDetailObjectPlanets.result.properties.orbital_period}</p>
+                                            <p>{store.currentDetailObjectPlanets.orbital_period}</p>
                                         </div>
                                         <div className={styles.modalPropertiesPlanet}>
                                             <p>Gravity</p>
-                                            <p>{store.currentDetailObjectPlanets.result.properties.gravity}</p>
+                                            <p>{store.currentDetailObjectPlanets.gravity}</p>
                                         </div>
                                         <div className={styles.modalPropertiesPlanet}>
                                             <p>Population</p>
-                                            <p>{store.currentDetailObjectPlanets.result.properties.population}</p>
+                                            <p>{store.currentDetailObjectPlanets.population}</p>
                                         </div>
                                         <div className={styles.modalPropertiesPlanet}>
                                             <p>Climate</p>
-                                            <p>{store.currentDetailObjectPlanets.result.properties.climate}</p>
+                                            <p>{store.currentDetailObjectPlanets.climate}</p>
                                         </div>
                                         <div className={styles.modalPropertiesPlanet}>
                                             <p>Terrain</p>
-                                            <p>{store.currentDetailObjectPlanets.result.properties.terrain}</p>
+                                            <p>{store.currentDetailObjectPlanets.terrain}</p>
                                         </div>
                                         <div className={styles.modalPropertiesPlanet}>
                                             <p>Surface Water</p>
-                                            <p>{store.currentDetailObjectPlanets.result.properties.surface_water}</p>
+                                            <p>{store.currentDetailObjectPlanets.surface_water}</p>
                                         </div>
                                     </div>
                                 </div>

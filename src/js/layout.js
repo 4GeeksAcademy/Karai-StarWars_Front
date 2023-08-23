@@ -8,7 +8,7 @@ import CreateAccount from "./component/CreateAccount.jsx";
 import NotLoad from './component/NotLoad.jsx'
 import Navbar from "./component/Navbar.jsx"
 import injectContext from "./store/appContext";
-import Fondo from "../img/fondo.png"
+
 
 //create your first component
 const Layout = () => {
@@ -20,38 +20,25 @@ const Layout = () => {
 
 	const [isLoad, setIsLoad] = useState(false)
 
-	useEffect(() => {
-		actions.getPeople();
-		actions.getPlanets();
-		actions.getStarShips();
-	}, []);
+	// useEffect(() => {
+	// 	actions.getPeople();
+	// 	actions.getPlanets();
+	// 	actions.getStarShips();
+	// }, []);
 
 	return (
 		<div>
-			{!isLoad ? (
-				<div>
-					<NotLoad />
-				</div>
-			) : (
-
-				<div style={{
-					backgroundImage: `url(${Fondo})`,
-					backgroundRepeat: 'no-repeat',
-					backgroundSize: 'contain',
-				}}>
-					<BrowserRouter basename={basename}>
-						<ScrollToTop>
-							<Navbar />
-							<Routes>
-								<Route path="/" element={<Home />} />
-								<Route path='/Createaccount' element={<CreateAccount />} />
-								<Route path='/Login' element={<NotLoad />} />
-								<Route path="*" element={<h1>Not found!</h1>} />
-							</Routes>
-						</ScrollToTop>
-					</BrowserRouter>
-				</div>
-			)}
+				<BrowserRouter basename={basename}>
+					<ScrollToTop>
+						<Routes>
+							<Route path="/" element={<NotLoad />} />
+							<Route path="/home" element={<Home />} />
+							<Route path='/Createaccount' element={<CreateAccount />} />
+							<Route path='/Login' element={<NotLoad />} />
+							<Route path="*" element={<h1>Not found!</h1>} />
+						</Routes>
+					</ScrollToTop>
+				</BrowserRouter>
 		</div>
 	);
 };

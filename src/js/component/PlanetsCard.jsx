@@ -15,19 +15,16 @@ const PlanetsCard = ({planets}) => {
                 <div className={`card ${styles.cardsStylePlanets}`}>
                     <div className="card-body">
                         <img
-                            src={`https://starwars-visualguide.com/assets/img/planets/${planets.result.uid}.jpg`}
+                            src={`https://starwars-visualguide.com/assets/img/planets/${planets.id}.jpg`}
                             className="card-img-top"
                             alt="..."
                             onError={(e) => {
-                                const uid = parseInt(planets.result.uid, 10);
-                                const fallbackUid = uid + 10;
-                                e.target.src = `https://starwars-visualguide.com/assets/img/planets/${fallbackUid}.jpg`;
-                                e.target.onerror = null;
+                                e.target.src = `https://starwars-visualguide.com/assets/img/planets/18.jpg`;
                               }}
                         />
-                        <h5 className="card-title" style={{marginTop: "10px"}}>{planets.result.properties.name}</h5>
-                        <p className="card-text">Diameter: {planets.result.properties.diameter} km</p>
-                        <p className="card-text">Climate: {planets.result.properties.climate}</p>
+                        <h5 className="card-title" style={{marginTop: "10px"}}>{planets.name}</h5>
+                        <p className="card-text">Diameter: {planets.diameter} km</p>
+                        <p className="card-text">Climate: {planets.climate}</p>
                         <div className={styles.cardBtn}>
                         <button onClick={() => actions.detailsToShowPlanets(planets)} className={styles.learnMore}>Learn More</button>                            
                         <button onClick={() => actions.addFavoritePlanet(planets)} style={{backgroundColor: "transparent"}} href="#"><i className="fa-regular fa-star" style={{ color: "#fae500" }}></i></button>

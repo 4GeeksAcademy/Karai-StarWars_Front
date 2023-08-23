@@ -1,10 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Favorites from "./Favorites.jsx"
 import styles from "../component/Styles.module.css";
 import favoriteLetter from "../../img/FAVORITES.png"
+import logOutLetter from "../../img/logoutLetter.png"
+
 
 const Navbar = () => {
+
+    const navigate = useNavigate()
+
+    const handlerLogOut = () => {
+        localStorage.removeItem("token");
+        navigate('/')
+    }
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -21,6 +31,14 @@ const Navbar = () => {
                             </li>
                         </ul>
                         <ul className="navbar-nav ms-auto">
+                            <li>
+                                <img
+                                    src={logOutLetter}
+                                    alt=""
+                                    style={{ width: '120px', padding: '14.3px 30px 0px 0px' }}
+                                    onClick={() => handlerLogOut()}
+                                />
+                            </li>
                             <li className="nav-item dropdown">
                                 <Link
                                     className="nav-link dropdown-toggle"

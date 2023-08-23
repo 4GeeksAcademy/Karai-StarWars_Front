@@ -35,20 +35,17 @@ const LearnMoreShips = () => {
                                         style={{
                                             objectFit: "cover",
                                         }}
-                                        src={`https://starwars-visualguide.com/assets/img/starships/${store.currentDetailObjectShips.result.uid}.jpg`}
+                                        src={`https://starwars-visualguide.com/assets/img/starships/${store.currentDetailObjectShips.id}.jpg`}
                                         className="card-img-top"
                                         alt="..."
                                         onError={(e) => {
-                                            const uid = parseInt(store.currentDetailObjectShips.result.uid, 10);
-                                            const fallbackUid = uid + 10;
-                                            e.target.src = `https://starwars-visualguide.com/assets/img/starships/${fallbackUid}.jpg`;
-                                            e.target.onerror = null;
-                                        }}
+                                            e.target.src = `https://starwars-visualguide.com/assets/img/starships/40.jpg`;
+                                          }}
                                     />
                                 </div>
                                 <div className="col-md-6 ">
                                     <div className="d-flex align-items-center flex-column justifiy-content-center">
-                                        <h3>{store.currentDetailObjectShips.result.properties.name}</h3>
+                                        <h3>{store.currentDetailObjectShips.name}</h3>
                                         <p style={{ marginLeft: '25px' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                     </div>
                                 </div>
@@ -57,51 +54,47 @@ const LearnMoreShips = () => {
                                 <div className={styles.modalPropertiesOverflow}>
                                     <div style={{ width: "100px" }}>
                                         <p>Model</p>
-                                        <p>{store.currentDetailObjectShips.result.properties.model}</p>
+                                        <p>{store.currentDetailObjectShips.model}</p>
                                     </div>
                                     <div className={styles.modalPropertiesShips}>
                                         <p>Class</p>
-                                        <p>{store.currentDetailObjectShips.result.properties.starship_class}</p>
+                                        <p>{store.currentDetailObjectShips.starship_class}</p>
                                     </div>
                                     <div className={styles.modalPropertiesShips}>
                                         <p>Manufacturer</p>
-                                        <p>{store.currentDetailObjectShips.result.properties.manufacturer}</p>
+                                        <p>{store.currentDetailObjectShips.manufacturer}</p>
                                     </div>
                                     <div className={styles.modalPropertiesShips}>
                                         <p>Cost In Credits</p>
-                                        <p>{store.currentDetailObjectShips.result.properties.cost_in_credits}</p>
+                                        <p>{store.currentDetailObjectShips.cost_in_credits}</p>
                                     </div>
                                     <div className={styles.modalPropertiesShips}>
                                         <p>Length</p>
-                                        <p>{store.currentDetailObjectShips.result.properties.length}</p>
+                                        <p>{store.currentDetailObjectShips.length}</p>
                                     </div>
                                     <div className={styles.modalPropertiesShips}>
                                         <p>Crew</p>
-                                        <p>{store.currentDetailObjectShips.result.properties.crew}</p>
+                                        <p>{store.currentDetailObjectShips.crew}</p>
                                     </div>
                                     <div className={styles.modalPropertiesShips}>
                                         <p>Passangers</p>
-                                        <p>{store.currentDetailObjectShips.result.properties.passangers}</p>
-                                    </div>
-                                    <div className={styles.modalPropertiesShips}>
-                                        <p>Max Atmosphering Speed</p>
-                                        <p>{store.currentDetailObjectShips.result.properties.max_atmosphering_speed}</p>
+                                        <p>{store.currentDetailObjectShips.passangers}</p>
                                     </div>
                                     <div className={styles.modalPropertiesShips}>
                                         <p>Hyperdrive Rating</p>
-                                        <p>{store.currentDetailObjectShips.result.properties.hyperdrive_rating}</p>
+                                        <p>{store.currentDetailObjectShips.hyperdrive_rating}</p>
                                     </div>
                                     <div className={styles.modalPropertiesShips}>
                                         <p>MGLT</p>
-                                        <p>{store.currentDetailObjectShips.result.properties.MGLT}</p>
+                                        <p>{store.currentDetailObjectShips.MGLT}</p>
                                     </div>
                                     <div className={styles.modalPropertiesShips}>
                                         <p>Cargo Capacity</p>
-                                        <p>{store.currentDetailObjectShips.result.properties.cargo_capacity}</p>
+                                        <p>{store.currentDetailObjectShips.cargo_capacity}</p>
                                     </div>
                                     <div className={styles.modalPropertiesShips}>
                                         <p>Consumables</p>
-                                        <p>{store.currentDetailObjectShips.result.properties.consumables}</p>
+                                        <p>{store.currentDetailObjectShips.consumables}</p>
                                     </div>
                                 </div>
                             </div>

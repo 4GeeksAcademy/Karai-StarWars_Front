@@ -1,15 +1,15 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      people: [],
+      url: 'https://karai2mil-jubilant-space-adventure-7gv5x447qg93rw9p-3000.preview.app.github.dev/',
+      user_id: '',
+      tokenObtained: false,
       characters: [],
       planets: [],
-      planetsProperties: [],
-      starShips: [],
-      starShipsProperties: [],
-      favoriteCharacters: [],
-      favoritePlanets: [],
-      favoriteShips: [],
+      starships: [],
+      favoriteCharactersIds: [],
+      favoritePlanetsIds: [],
+      favoriteShipsIds: [],
       currentDetailObject: {},
       currentDetailObjectPlanets: {},
       currentDetailObjectShips: {},
@@ -18,176 +18,276 @@ const getState = ({ getStore, getActions, setStore }) => {
       isModalOpenShips: false
     },
     actions: {
-      getPeople: async () => {
+      createUser: async (user_data) => {
         try {
-          const result = await fetch("https://www.swapi.tech/api/people")
+          const store = getStore()
+          const response = await fetch(store.url + 'users', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user_data)
+          })
+          if (!response.ok) {
+            throw new Error("Creating user error")
+          }
+          const data = await response.json()
+          console.log('User created successfully:', data)
+          const user_data_token = {
+            mail: user_data.mail,
+            password: user_data.password
+          }
+          const {getToken} = getActions()
+          getToken(user_data_token)
+        } catch (error) {
+          console.log({ 'Creating user error': error })
+        }
+      },
+
+      getToken: async (user_data) => {
+        try {
+          const store = getStore()
+          const response = await fetch(store.url + 'token', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user_data)
+          })
+          if (!response.ok) {
+            throw new Error("Getting token error")
+          }
+          const data = await response.json()
+          console.log('Token obtained:', data)
+          localStorage.setItem("token", data.token);
+          setStore({...store, user_id: data.user_id})
+          setStore({...store, tokenObtained: true})
+        } catch (error) {
+          console.log('Getting token error', error)
+        }
+      },
+
+      setTokenObtained: () => {
+        const store = getStore()
+        setStore({...store, tokenObtained: false})
+      },
+
+      getValidation: async () => {
+        try {
+          const store = getStore()
+          const token = localStorage.getItem('token')
+          const response = await fetch(store.url + 'protected', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + token
+            }
+          })
+          if (!response.ok) {
+            throw new Error("First validation error")
+          }
+          const data = await response.json()
+          console.log('Validation:', data)
+          return data
+
+        } catch (error) {
+          console.log('Validation error', error)
+        }
+      },
+
+      getCharacters: async () => {
+        try {
+          const store = getStore()
+          const result = await fetch(store.url + 'character')
           if (!result.ok) {
-            throw new Error("Charging error")
+            throw new Error("Getting characters error")
           }
           const data = await result.json()
-          console.log("Cargamos primer lista:", data)
-          const store = getStore()
-          setStore({ ...store, people: data.results });
-          const { getLinksAndCharacters } = getActions()
-          await getLinksAndCharacters()
+          console.log("Characters charged succesfully:", data)
+          setStore({ ...store, characters: data });
         } catch (error) {
           console.log("Charging people error", error)
         }
       },
 
-      getLinksAndCharacters: async () => {
-        const store = getStore()
-        const urlList = store.people.map(character => character.url)
-        console.log(urlList)
-        const { handlerGetCharactersProperties } = getActions()
-        await handlerGetCharactersProperties(urlList)
-      },
-
-      handlerGetCharactersProperties: async (urlList) => {
-        const { getCharactersProperties } = getActions()
-        const pedidos = await urlList.map((url) => getCharactersProperties(url))
-        await Promise.all(pedidos)
-      },
-
-      getCharactersProperties: async (url) => {
-        try {
-          const result = await fetch(url)
-          if (!result.ok) {
-            throw new Error("Charging error")
-          }
-          const data = await result.json()
-          console.log(data)
-          const store = getStore()
-          setStore({ ...store, characters: [...store.characters, data] });
-          console.log("Los archivos son", store.characters)
-        } catch (error) {
-          console.log("Charging characters error", error)
-        }
-      },
-
       getPlanets: async () => {
         try {
-          const result = await fetch("https://www.swapi.tech/api/planets")
+          const store = getStore()
+          const result = await fetch(store.url + 'planet')
           if (!result.ok) {
-            throw new Error("Charging error")
+            throw new Error("Getting planets error")
           }
           const data = await result.json()
-          console.log("Cargamos primer lista:", data)
-          const store = getStore()
-          setStore({ ...store, planets: data.results });
-          const { getLinksAndPlanets } = getActions()
-          await getLinksAndPlanets()
+          console.log("Planets charged seccesfully:", data)
+          setStore({ ...store, planets: data });
         } catch (error) {
-          console.log("Charging planets error", error)
-        }
-      },
-
-      getLinksAndPlanets: async () => {
-        const store = getStore()
-        const urlList = store.planets.map(planet => planet.url)
-        console.log(urlList)
-        const { handlerGetPlanetsProperties } = getActions()
-        await handlerGetPlanetsProperties(urlList)
-      },
-
-      handlerGetPlanetsProperties: async (urlList) => {
-        const { getPlanetsProperties } = getActions()
-        const pedidos = await urlList.map((url) => getPlanetsProperties(url))
-        await Promise.all(pedidos)
-      },
-
-      getPlanetsProperties: async (url) => {
-        try {
-          const result = await fetch(url)
-          if (!result.ok) {
-            throw new Error("Charging error")
-          }
-          const data = await result.json()
-          console.log(data)
-          const store = getStore()
-          setStore({ ...store, planetsProperties: [...store.planetsProperties, data] });
-          console.log("Los archivos son", store.planets)
-        } catch (error) {
-          console.log("Charging planets error", error)
+          console.log("Charging people error", error)
         }
       },
 
       getStarShips: async () => {
         try {
-          const result = await fetch("https://www.swapi.tech/api/starships")
+          const store = getStore()
+          const result = await fetch(store.url + 'starship')
           if (!result.ok) {
-            throw new Error("Charging error")
+            throw new Error("Getting starships error")
           }
           const data = await result.json()
-          console.log("Cargamos primer lista:", data)
-          const store = getStore()
-          setStore({ ...store, starShips: data.results });
-          const { getLinksAndStarShips } = getActions()
-          await getLinksAndStarShips()
+          console.log("Characters charged succesfully:", data)
+          setStore({ ...store, starships: data });
         } catch (error) {
-          console.log("Charging starShips error", error)
+          console.log("Charging people error", error)
         }
       },
 
-      getLinksAndStarShips: async () => {
-        const store = getStore()
-        const urlList = store.starShips.map(character => character.url)
-        console.log(urlList)
-        const { handlerGetStarShipsProperties } = getActions()
-        await handlerGetStarShipsProperties(urlList)
-      },
-
-      handlerGetStarShipsProperties: async (urlList) => {
-        const { getStarShipsProperties } = getActions()
-        const pedidos = await urlList.map((url) => getStarShipsProperties(url))
-        await Promise.all(pedidos)
-      },
-
-      getStarShipsProperties: async (url) => {
-        try {
-          const result = await fetch(url)
+      getFavorites: async () => {
+        try{
+          const store = getStore()
+          const result = await fetch(store.url + 'favorites/' + store.user_id)
           if (!result.ok) {
-            throw new Error("Charging error")
+            throw new Error('Getting favorites error')
           }
           const data = await result.json()
-          console.log(data)
-          const store = getStore()
-          setStore({ ...store, starShipsProperties: [...store.starShipsProperties, data] });
-          console.log("Los archivos son", store.starShipsProperties)
-        } catch (error) {
-          console.log("Charging starShipsProperties error", error)
+          console.log('Favorites charged succesfully:', data)
+          setStore({...store, favoriteCharactersIds: data.characters})
+          setStore({...store, favoritePlanetsIds: data.planets})
+          setStore({...store, favoriteShipsIds: data.starships})
+        }catch(error){
+          console.log('Getting favorites error', error)
         }
       },
 
       addFavoriteCharacter: async (character) => {
-        const store = getStore()
-        setStore({ ...store, favoriteCharacters: [...store.favoriteCharacters, character] });
+        try{
+          const store = getStore()
+          setStore({ ...store, favoriteCharactersIds: [...store.favoriteCharactersIds, character.id] });
+          const favorite_data = {'character_id': character.id, 'user_id': store.user_id}
+          const response = await fetch(store.url + 'favorites/character', {
+            method:['POST'],
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(favorite_data)
+          })
+            if(!response.ok){
+              throw new Error('Charging favorite character error')
+            }
+          const data = await response.json()
+          console.log('Result:', data)
+        }catch(error){
+          console.log('Error charging favorite character:', error)
+        }
       },
-      addFavoritePlanet: async (character) => {
-        const store = getStore()
-        setStore({ ...store, favoritePlanets: [...store.favoritePlanets, character] });
+      addFavoritePlanet: async (planet) => {
+        try{
+          const store = getStore()
+          setStore({ ...store, favoritePlanetsIds: [...store.favoritePlanetsIds, planet.id] });
+          const favorite_data = {'planet_id': planet.id, 'user_id': store.user_id}
+          const response = await fetch(store.url + 'favorites/planet', {
+            method:['POST'],
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(favorite_data)
+          })
+            if(!response.ok){
+              throw new Error('Charging favorite planet error')
+            }
+          const data = await response.json()
+          console.log('Result:', data)
+        }catch(error){
+          console.log('Error charging favorite planet:', error)
+        }
       },
-      addFavoriteShip: async (character) => {
-        const store = getStore()
-        setStore({ ...store, favoriteShips: [...store.favoriteShips, character] });
+      addFavoriteShip: async (starship) => {
+        try{
+          const store = getStore()
+          setStore({ ...store, favoriteShipsIds: [...store.favoriteShipsIds, starship.id] });
+          const favorite_data = {'starship_id': starship.id, 'user_id': store.user_id}
+          const response = await fetch(store.url + 'favorites/starship', {
+            method:['POST'],
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(favorite_data)
+          })
+            if(!response.ok){
+              throw new Error('Charging favorite starship error')
+            }
+          const data = await response.json()
+          console.log('Result:', data)
+        }catch(error){
+          console.log('Error charging favorite starship:', error)
+        }
       },
 
-      deleteFavoriteCharacter: async (uid) => {
-        const store = getStore()
-        const filteredList = store.favoriteCharacters.filter((element) => element.result.uid !== uid)
-        setStore({ ...store, favoriteCharacters: filteredList })
-      },
-      deleteFavoritePlanet: async (uid) => {
-        const store = getStore()
-        const filteredList = store.favoritePlanets.filter((element) => element.result.uid !== uid)
-        setStore({ ...store, favoritePlanets: filteredList })
-      },
-      deleteFavoriteShip: async (uid) => {
-        const store = getStore()
-        const filteredList = store.favoriteShips.filter((element) => element.result.uid !== uid)
-        setStore({ ...store, favoriteShips: filteredList })
+      deleteFavoriteCharacter: async (character) => {
+        try{
+          const store = getStore()
+          const filteredList = store.favoriteCharactersIds.filter((element) => element !== character.id)
+          setStore({ ...store, favoriteCharactersIds: filteredList })
+          const favorite_data = {'character_id': character.id, 'user_id': store.user_id}
+          const response = await fetch(store.url + 'favorites/character', {
+            method:['DELETE'],
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(favorite_data)
+          })
+            if(!response.ok){
+              throw new Error('Deleting favorite character error')
+            }
+          const data = await response.json()
+          console.log('Result:', data)
+        }catch(error){
+          console.log('Error deleting favorite character:', error)
+        }
       },
 
+      deleteFavoritePlanet: async (planet) => {
+        try{
+          const store = getStore()
+          const filteredList = store.favoritePlanetsIds.filter((element) => element !== planet.id)
+          setStore({ ...store, favoritePlanetsIds: filteredList })
+          const favorite_data = {'planet_id': planet.id, 'user_id': store.user_id}
+          const response = await fetch(store.url + 'favorites/planet', {
+            method:['DELETE'],
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(favorite_data)
+          })
+            if(!response.ok){
+              throw new Error('Deleting favorite planet error')
+            }
+          const data = await response.json()
+          console.log('Result:', data)
+        }catch(error){
+          console.log('Error deleting favorite planet:', error)
+        }
+      },
+      deleteFavoriteShip: async (starship) => {
+        try{
+          const store = getStore()
+          const filteredList = store.favoriteShipsIds.filter((element) => element !== starship.id)
+          setStore({ ...store, favoriteShipsIds: filteredList })
+          const favorite_data = {'starship_id': starship.id, 'user_id': store.user_id}
+          const response = await fetch(store.url + 'favorites/starship', {
+            method:['DELETE'],
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(favorite_data)
+          })
+            if(!response.ok){
+              throw new Error('Deleting favorite starship error')
+            }
+          const data = await response.json()
+          console.log('Result:', data)
+        }catch(error){
+          console.log('Error deleting favorite starship:', error)
+        }
+      },
       detailsToShow: async (element) => {
         console.log("entre a detail", element)
         const store = getStore()
