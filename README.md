@@ -23,6 +23,10 @@ $ cp .env.example .env
 $ npm run start
 ```
 
+### Back-end repository
+
+https://github.com/4GeeksAcademy/Karai-StarWars_Back_2.0
+
 ### Styles
 You can update the `styles/index.css` or create new `.css` files inside `styles/` and import them into your current scss or js files depending on your needs.
 
