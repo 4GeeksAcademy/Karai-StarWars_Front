@@ -19,31 +19,23 @@ const notLoad = () => {
         navigate('/CreateAccount');
     };
 
-    const handlerGetToken = () => {
+    const handlerGetToken = async () => {
+        setShowLoadingCircle(true)
         const user_data = {
             mail: mail,
             password: password
         }
-        actions.getToken(user_data)
-        setShowLoadingCircle(true)
-    }
-
-    useEffect(() => {
-        if (store.tokenObtained) {
+        const getTokenData = await actions.getToken(user_data)
+        if (getTokenData.status == 'COMPLETED'){
             actions.getCharacters()
             actions.getPlanets()
             actions.getStarShips()
             actions.getFavorites()
-            const timer = setTimeout(() => {
+            localStorage.setItem("token", getTokenData.token);
+            localStorage.setItem("user_id", getTokenData.user_id);
                 navigate('/home');
-                actions.setTokenObtained()
-            }, 5000);
-            return () => {
-                clearTimeout(timer);
-            };
-        }
-    }, [store.tokenObtained])
-
+            }
+    }
 
 
     return (

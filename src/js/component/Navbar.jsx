@@ -12,6 +12,7 @@ const Navbar = () => {
 
     const handlerLogOut = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("user_id")
         navigate('/')
     }
 
@@ -35,7 +36,7 @@ const Navbar = () => {
                                 <img
                                     src={logOutLetter}
                                     alt=""
-                                    style={{ width: '120px', padding: '14.3px 30px 0px 0px' }}
+                                    style={{ width: '120px', padding: '14.3px 30px 0px 0px', cursor: 'pointer' }}
                                     onClick={() => handlerLogOut()}
                                 />
                             </li>

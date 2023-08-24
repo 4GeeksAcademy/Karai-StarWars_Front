@@ -15,12 +15,9 @@ const PlanetsCard = ({starship}) => {
                 <div className={`card ${styles.cardsStyleShips}`}>
                     <div className="card-body" style={{height: "auto"}}>
                         <img
-                            src={`https://starwars-visualguide.com/assets/img/starships/${starship.id}.jpg`}
+                            src={starship.image_url}
                             className="card-img-top" 
                             alt="..."
-                            onError={(e) => {
-                                e.target.src = `https://starwars-visualguide.com/assets/img/starships/40.jpg`;
-                              }}
                         />
                         <h5 className="card-title" style={{marginTop: "10px", height: "40px"}}>{starship.name}</h5>
                         <p className="card-text" style={{ height: "35px"}}>Model: {starship.model}</p>

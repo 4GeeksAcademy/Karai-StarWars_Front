@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      url: 'https://karai2mil-jubilant-space-adventure-7gv5x447qg93rw9p-3000.preview.app.github.dev/',
+      url: 'https://reimagined-engine-gg4rpwwxg6vhw64r-3000.app.github.dev/',
       user_id: '',
       tokenObtained: false,
       characters: [],
@@ -32,13 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             throw new Error("Creating user error")
           }
           const data = await response.json()
-          console.log('User created successfully:', data)
-          const user_data_token = {
-            mail: user_data.mail,
-            password: user_data.password
-          }
-          const {getToken} = getActions()
-          getToken(user_data_token)
+          return data
         } catch (error) {
           console.log({ 'Creating user error': error })
         }
@@ -58,10 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             throw new Error("Getting token error")
           }
           const data = await response.json()
-          console.log('Token obtained:', data)
-          localStorage.setItem("token", data.token);
-          setStore({...store, user_id: data.user_id})
-          setStore({...store, tokenObtained: true})
+          return data
         } catch (error) {
           console.log('Getting token error', error)
         }
@@ -142,8 +133,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       getFavorites: async () => {
         try{
+          const user_id = localStorage.getItem('user_id')
           const store = getStore()
-          const result = await fetch(store.url + 'favorites/' + store.user_id)
+          const result = await fetch(store.url + 'favorites/' + user_id)
           if (!result.ok) {
             throw new Error('Getting favorites error')
           }
@@ -160,8 +152,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       addFavoriteCharacter: async (character) => {
         try{
           const store = getStore()
+          const user_id = localStorage.getItem('user_id')
           setStore({ ...store, favoriteCharactersIds: [...store.favoriteCharactersIds, character.id] });
-          const favorite_data = {'character_id': character.id, 'user_id': store.user_id}
+          const favorite_data = {'character_id': character.id, 'user_id': user_id}
           const response = await fetch(store.url + 'favorites/character', {
             method:['POST'],
             headers: {
@@ -181,8 +174,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       addFavoritePlanet: async (planet) => {
         try{
           const store = getStore()
+          const user_id = localStorage.getItem('user_id')
           setStore({ ...store, favoritePlanetsIds: [...store.favoritePlanetsIds, planet.id] });
-          const favorite_data = {'planet_id': planet.id, 'user_id': store.user_id}
+          const favorite_data = {'planet_id': planet.id, 'user_id': user_id}
           const response = await fetch(store.url + 'favorites/planet', {
             method:['POST'],
             headers: {
@@ -202,8 +196,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       addFavoriteShip: async (starship) => {
         try{
           const store = getStore()
+          const user_id = localStorage.getItem('user_id')
           setStore({ ...store, favoriteShipsIds: [...store.favoriteShipsIds, starship.id] });
-          const favorite_data = {'starship_id': starship.id, 'user_id': store.user_id}
+          const favorite_data = {'starship_id': starship.id, 'user_id': user_id}
           const response = await fetch(store.url + 'favorites/starship', {
             method:['POST'],
             headers: {
@@ -224,9 +219,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       deleteFavoriteCharacter: async (character) => {
         try{
           const store = getStore()
+          const user_id = localStorage.getItem('user_id')
           const filteredList = store.favoriteCharactersIds.filter((element) => element !== character.id)
           setStore({ ...store, favoriteCharactersIds: filteredList })
-          const favorite_data = {'character_id': character.id, 'user_id': store.user_id}
+          const favorite_data = {'character_id': character.id, 'user_id': user_id}
           const response = await fetch(store.url + 'favorites/character', {
             method:['DELETE'],
             headers: {
@@ -247,9 +243,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       deleteFavoritePlanet: async (planet) => {
         try{
           const store = getStore()
+          const user_id = localStorage.getItem('user_id')
           const filteredList = store.favoritePlanetsIds.filter((element) => element !== planet.id)
           setStore({ ...store, favoritePlanetsIds: filteredList })
-          const favorite_data = {'planet_id': planet.id, 'user_id': store.user_id}
+          const favorite_data = {'planet_id': planet.id, 'user_id': user_id}
           const response = await fetch(store.url + 'favorites/planet', {
             method:['DELETE'],
             headers: {
@@ -269,9 +266,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       deleteFavoriteShip: async (starship) => {
         try{
           const store = getStore()
+          const user_id = localStorage.getItem('user_id')
           const filteredList = store.favoriteShipsIds.filter((element) => element !== starship.id)
           setStore({ ...store, favoriteShipsIds: filteredList })
-          const favorite_data = {'starship_id': starship.id, 'user_id': store.user_id}
+          const favorite_data = {'starship_id': starship.id, 'user_id': user_id}
           const response = await fetch(store.url + 'favorites/starship', {
             method:['DELETE'],
             headers: {

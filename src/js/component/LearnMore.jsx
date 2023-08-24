@@ -36,12 +36,9 @@ const LearnMore = () => {
                                                 style={{
                                                     objectFit: "cover",
                                                 }}
-                                                src={`https://starwars-visualguide.com/assets/img/characters/${store.currentDetailObject.id}.jpg`}
+                                                src={`https://starwars-visualguide.com/assets/img/characters/${store.currentDetailObject.uid}.jpg`}
                                                 className="card-img-top"
                                                 alt="..."
-                                                onError={(e) => {
-                                                    e.target.src = `https://starwars-visualguide.com/assets/img/characters/81.jpg`;
-                                                }}
                                             />
                                     </div>
                                     <div className="col-md-6 ">

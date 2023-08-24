@@ -15,12 +15,9 @@ const PlanetsCard = ({planets}) => {
                 <div className={`card ${styles.cardsStylePlanets}`}>
                     <div className="card-body">
                         <img
-                            src={`https://starwars-visualguide.com/assets/img/planets/${planets.id}.jpg`}
+                            src={planets.image_url}
                             className="card-img-top"
                             alt="..."
-                            onError={(e) => {
-                                e.target.src = `https://starwars-visualguide.com/assets/img/planets/18.jpg`;
-                              }}
                         />
                         <h5 className="card-title" style={{marginTop: "10px"}}>{planets.name}</h5>
                         <p className="card-text">Diameter: {planets.diameter} km</p>

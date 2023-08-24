@@ -20,15 +20,9 @@ const CharacterCard = ({ character }) => {
                                 height: "240px",
                                 objectPosition: "top",
                             }}
-                            src={`https://starwars-visualguide.com/assets/img/characters/${character.id}.jpg`}
+                            src={character.image_url}
                             className="card-img-top"
                             alt="..."
-                            onError={(e) => {
-                                // const id = parseInt(store.currentDetailObjectPlanets.id, 1);
-                                // const fallbackUid = id + 1;
-                                e.target.src = `https://starwars-visualguide.com/assets/img/characters/81.jpg`;
-                                // e.target.onerror = null;
-                            }}
                         />
                         <h5 className="card-title" style={{ marginTop: "10px" }}>{character.name}</h5>
                         <p className="card-text">Gender: {character.gender}</p>

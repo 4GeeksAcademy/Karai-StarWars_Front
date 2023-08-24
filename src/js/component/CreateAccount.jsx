@@ -11,36 +11,24 @@ const CreateAccount = () => {
 
     const { store, actions } = useContext(Context)
 
-    const [username, setUsername] = useState()
-    const [mail, setMail] = useState()
-    const [password, setPassword] = useState()
+    const [username, setUsername] = useState('')
+    const [mail, setMail] = useState('')
+    const [password, setPassword] = useState('')
     const [showLoadingCircle, setShowLoadingCircle] = useState(false)
 
-    const handlerCreateUser = () => {
+    const handlerCreateUser = async () => {
+        setShowLoadingCircle(true)
         const user_data = {
             username: username,
             mail: mail,
             password: password
         }
-        actions.createUser(user_data)
-        setShowLoadingCircle(true)
-    }
-
-    useEffect(() => {
-        if (store.tokenObtained) {
-            actions.getCharacters()
-            actions.getPlanets()
-            actions.getStarShips()
-            actions.getFavorites()
-            // actions.setTokenObtained()
-            const timer = setTimeout(() => {
-                navigate('/home');
-            }, 5000);
-            return () => {
-                clearTimeout(timer);
-            };
+        const createUserResult = await actions.createUser(user_data)
+        if (createUserResult.status == 'COMPLETED') {
+            alert('User created, please login')
+            navigate('/');
         }
-    }, [store.tokenObtained])
+    }
 
     return (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -53,13 +41,13 @@ const CreateAccount = () => {
             </div>
             <div className={styles.overlay} style={{}}>
                 <div>
-                    <input onChange={(e) => setUsername(e.target.value)} type="text" placeholder='username' className={styles.loginInputs} />
+                    <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder='username' className={styles.loginInputs} />
                 </div>
                 <div>
-                    <input onChange={(e) => setMail(e.target.value)} type="text" placeholder='mail' className={styles.loginInputs} />
+                    <input value={mail} onChange={(e) => setMail(e.target.value)} type="text" placeholder='mail' className={styles.loginInputs} />
                 </div>
                 <div>
-                    <input onChange={(e) => setPassword(e.target.value)} type="password" placeholder='password' className={styles.loginInputs} />
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder='password' className={styles.loginInputs} />
                 </div>
                 <div style={{ position: 'relative', padding: '0px', margin: '0px' }}>
                     <img
@@ -67,7 +55,7 @@ const CreateAccount = () => {
                         alt=""
                         style={{ width: '60%', padding: '20px 0px 0px 259px ' }}
                     />
-                    <p onClick={() => handlerCreateUser()} className={styles.overlay} style={{ color: '#f8da2d', padding: '30px 8px 0px 0px' }}>_____________</p>
+                    <p onClick={() => handlerCreateUser()} className={styles.overlay} style={{ color: '#f8da2d', padding: '30px 8px 0px 0px', cursor: 'pointer' }}>_____________</p>
                     {showLoadingCircle &&
                     <div style={{ position: 'absolute', padding: '20px 0px 0px 315px ', marginBottom: '30px' }}>
                         <div className={styles.loadingCircle}></div>

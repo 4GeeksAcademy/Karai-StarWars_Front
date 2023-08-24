@@ -35,12 +35,9 @@ const LearnMoreShips = () => {
                                         style={{
                                             objectFit: "cover",
                                         }}
-                                        src={`https://starwars-visualguide.com/assets/img/starships/${store.currentDetailObjectShips.id}.jpg`}
+                                        src={`https://starwars-visualguide.com/assets/img/starships/${store.currentDetailObjectShips.uid}.jpg`}
                                         className="card-img-top"
                                         alt="..."
-                                        onError={(e) => {
-                                            e.target.src = `https://starwars-visualguide.com/assets/img/starships/40.jpg`;
-                                          }}
                                     />
                                 </div>
                                 <div className="col-md-6 ">

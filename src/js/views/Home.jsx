@@ -28,94 +28,85 @@ const Home = () => {
 		console.log("Alto completo de la página:", fullPageHeight);
 	};
 
-	// useEffect(() => {
-	// 	const isUserValid = async () => {
-	// 		const response = await actions.getValidation()
-	// 		const true_or_false = response
-	// 		if (true_or_false) {
-	// 			setIsLoad(true)
-	// 		} else {
-	// 			console.log('Not validated.')
-	// 			navigate('/Login')
-	// 		}
-	// 	}
-	// 	isUserValid()
-	// }, [])
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		if (token) {
+			actions.getCharacters()
+            actions.getPlanets()
+            actions.getStarShips()
+            actions.getFavorites()
+		} else {
+			navigate('/');
+		}
+	}, [])
 
 
 
 	return (
-		// <div>
-		// 	{!isLoad ? (
-		// 		<h1>Not validated</h1>
-		// 	) : (
-				<div style={{
-					backgroundImage: `url(${Fondo})`,
-					backgroundRepeat: 'no-repeat',
-					backgroundSize: 'contain',
-				}}>
-					<NavBar />
-					<div>
-						<div className={styles.titles}>
-							<img
-								src={CharactersLetter}
-								alt=""
-								style={{ width: "250px" }}
-							/>
-						</div>
-						<div className={styles.cardsOverflow}>
-							{
-								store.characters.map((characters, index) => (
-									<CharacterCard
-										key={index}
-										character={characters}
-									/>
-								))
-							}
-						</div>
-					</div>
-
-					<div className={styles.titles}>
-						<img
-							src={PlanetsLetter}
-							alt=""
-							style={{ width: "200px" }}
-						/>
-					</div>
-					<div className={styles.cardsOverflow}>
-						{
-							store.planets.map((planets, index) => (
-								<PlanetCard
-									key={index}
-									planets={planets}
-								/>
-							))
-						}
-					</div>
-					<div className={styles.titles}>
-						<img
-							src={StarshipLetter}
-							alt=""
-							style={{ width: "250px" }}
-						/>
-					</div>
-					<div className={styles.cardsOverflow}>
-						{
-							store.starships.map((ships, index) => (
-								<StarShipCard
-									key={index}
-									starship={ships}
-								/>
-							))
-						}
-					</div>
+		<div style={{
+			backgroundImage: `url(${Fondo})`,
+			backgroundRepeat: 'no-repeat',
+			backgroundSize: 'contain',
+		}}>
+			<NavBar />
+			<div>
+				<div className={styles.titles}>
+					<img
+						src={CharactersLetter}
+						alt=""
+						style={{ width: "250px" }}
+					/>
 				</div>
-	// 		)}
-	// 	</div>
-	 )
+				<div className={styles.cardsOverflow}>
+					{ store.characters.length > 0 &&
+						store.characters.map((characters, index) => (
+							<CharacterCard
+								key={index}
+								character={characters}
+							/>
+						))
+					}
+				</div>
+			</div>
+
+			<div className={styles.titles}>
+				<img
+					src={PlanetsLetter}
+					alt=""
+					style={{ width: "200px" }}
+				/>
+			</div>
+			<div className={styles.cardsOverflow}>
+				{ store.planets.length > 0 &&
+					store.planets.map((planets, index) => (
+						<PlanetCard
+							key={index}
+							planets={planets}
+						/>
+					))
+				}
+			</div>
+			<div className={styles.titles}>
+				<img
+					src={StarshipLetter}
+					alt=""
+					style={{ width: "250px" }}
+				/>
+			</div>
+			<div className={styles.cardsOverflow}>
+				{store.starships.length > 0 &&
+					store.starships.map((ships, index) => (
+						<StarShipCard
+							key={index}
+							starship={ships}
+						/>
+					))
+				}
+			</div>
+		</div>
+		// 		)}
+		// 	</div>
+	)
 };
 
 export default Home
-
-
-// https://starwars-visualguide.com/assets/img/characters/1.jpg

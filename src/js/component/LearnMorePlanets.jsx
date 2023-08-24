@@ -36,12 +36,9 @@ const LearnMorePlanets = () => {
                                             style={{
                                                 objectFit: "cover",
                                             }}
-                                            src={`https://starwars-visualguide.com/assets/img/planets/${store.currentDetailObjectPlanets.id}.jpg`}
+                                            src={`https://starwars-visualguide.com/assets/img/planets/${store.currentDetailObjectPlanets.uid}.jpg`}
                                             className="card-img-top"
                                             alt="..."
-                                            onError={(e) => {
-                                                e.target.src = `https://starwars-visualguide.com/assets/img/planets/18.jpg`;
-                                              }}
                                         />
                                     </div>
                                     <div className="col-md-6 ">

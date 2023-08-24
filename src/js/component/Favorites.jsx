@@ -23,7 +23,7 @@ const Favorites = () => {
                     />
                 </div>
                 {
-                    store.favoriteCharactersIds.length > 0 ? (
+                    store.favoriteCharactersIds.length & store.characters.length > 0 ? (
                         store.favoriteCharactersIds.map((element, index) => {
                             const character = store.characters.find((character) => character.id === element);
                             return (
@@ -48,7 +48,7 @@ const Favorites = () => {
                     />
                 </div>
                 {
-                    store.favoritePlanetsIds.length > 0 ? (
+                    store.favoritePlanetsIds.length & store.planets.length > 0 ? (
                         store.favoritePlanetsIds.map((element, index) => {
 
                             const planet = store.planets.find((planet) => planet.id === element);
@@ -75,7 +75,7 @@ const Favorites = () => {
                     />
                 </div>
                 {
-                    store.favoriteShipsIds.length > 0 ? (
+                    store.favoriteShipsIds.length & store.starships.length > 0 ? (
                         store.favoriteShipsIds.map((element, index) => {
 
                             const starship = store.starships.find((starship) => starship.id === element);
