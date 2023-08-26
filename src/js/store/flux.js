@@ -140,10 +140,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             throw new Error('Getting favorites error')
           }
           const data = await result.json()
-          console.log('Favorites charged succesfully:', data)
-          setStore({...store, favoriteCharactersIds: data.characters})
-          setStore({...store, favoritePlanetsIds: data.planets})
-          setStore({...store, favoriteShipsIds: data.starships})
+          console.log('Favorites charged succesfully:', data);
+          setStore({...store, favoriteCharactersIds: data.characters })
+          setStore({...store, favoritePlanetsIds: data.planets })
+          setStore({...store, favoriteShipsIds: data.starships })
         }catch(error){
           console.log('Getting favorites error', error)
         }
@@ -153,7 +153,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         try{
           const store = getStore()
           const user_id = localStorage.getItem('user_id')
-          setStore({ ...store, favoriteCharactersIds: [...store.favoriteCharactersIds, character.id] });
+          // setStore({ ...store, favoriteCharactersIds: [...store.favoriteCharactersIds, character.id] });
+          console.log(store.favoriteCharactersIds)
           const favorite_data = {'character_id': character.id, 'user_id': user_id}
           const response = await fetch(store.url + 'favorites/character', {
             method:['POST'],
@@ -167,15 +168,18 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           const data = await response.json()
           console.log('Result:', data)
+          const { getFavorites } = getActions()
+          getFavorites()
         }catch(error){
           console.log('Error charging favorite character:', error)
         }
       },
+
       addFavoritePlanet: async (planet) => {
         try{
           const store = getStore()
           const user_id = localStorage.getItem('user_id')
-          setStore({ ...store, favoritePlanetsIds: [...store.favoritePlanetsIds, planet.id] });
+          // setStore({ ...store, favoritePlanetsIds: [...store.favoritePlanetsIds, planet.id] });
           const favorite_data = {'planet_id': planet.id, 'user_id': user_id}
           const response = await fetch(store.url + 'favorites/planet', {
             method:['POST'],
@@ -189,15 +193,18 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           const data = await response.json()
           console.log('Result:', data)
+          const { getFavorites } = getActions()
+          getFavorites()
         }catch(error){
           console.log('Error charging favorite planet:', error)
         }
       },
+
       addFavoriteShip: async (starship) => {
         try{
           const store = getStore()
           const user_id = localStorage.getItem('user_id')
-          setStore({ ...store, favoriteShipsIds: [...store.favoriteShipsIds, starship.id] });
+          // setStore({ ...store, favoriteShipsIds: [...store.favoriteShipsIds, starship.id] });
           const favorite_data = {'starship_id': starship.id, 'user_id': user_id}
           const response = await fetch(store.url + 'favorites/starship', {
             method:['POST'],
@@ -211,6 +218,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           const data = await response.json()
           console.log('Result:', data)
+          const { getFavorites } = getActions()
+          getFavorites()
         }catch(error){
           console.log('Error charging favorite starship:', error)
         }
@@ -220,8 +229,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         try{
           const store = getStore()
           const user_id = localStorage.getItem('user_id')
-          const filteredList = store.favoriteCharactersIds.filter((element) => element !== character.id)
-          setStore({ ...store, favoriteCharactersIds: filteredList })
+          // const filteredList = store.favoriteCharactersIds.filter((element) => element !== character.id)
+          // setStore({ ...store, favoriteCharactersIds: filteredList })
           const favorite_data = {'character_id': character.id, 'user_id': user_id}
           const response = await fetch(store.url + 'favorites/character', {
             method:['DELETE'],
@@ -235,6 +244,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           const data = await response.json()
           console.log('Result:', data)
+          const { getFavorites } = getActions()
+          getFavorites()
         }catch(error){
           console.log('Error deleting favorite character:', error)
         }
@@ -244,8 +255,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         try{
           const store = getStore()
           const user_id = localStorage.getItem('user_id')
-          const filteredList = store.favoritePlanetsIds.filter((element) => element !== planet.id)
-          setStore({ ...store, favoritePlanetsIds: filteredList })
+          // const filteredList = store.favoritePlanetsIds.filter((element) => element !== planet.id)
+          // setStore({ ...store, favoritePlanetsIds: filteredList })
           const favorite_data = {'planet_id': planet.id, 'user_id': user_id}
           const response = await fetch(store.url + 'favorites/planet', {
             method:['DELETE'],
@@ -259,16 +270,19 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           const data = await response.json()
           console.log('Result:', data)
+          const { getFavorites } = getActions()
+          getFavorites()
         }catch(error){
           console.log('Error deleting favorite planet:', error)
         }
       },
+
       deleteFavoriteShip: async (starship) => {
         try{
           const store = getStore()
           const user_id = localStorage.getItem('user_id')
-          const filteredList = store.favoriteShipsIds.filter((element) => element !== starship.id)
-          setStore({ ...store, favoriteShipsIds: filteredList })
+          // const filteredList = store.favoriteShipsIds.filter((element) => element !== starship.id)
+          // setStore({ ...store, favoriteShipsIds: filteredList })
           const favorite_data = {'starship_id': starship.id, 'user_id': user_id}
           const response = await fetch(store.url + 'favorites/starship', {
             method:['DELETE'],
@@ -282,28 +296,34 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           const data = await response.json()
           console.log('Result:', data)
+          const { getFavorites } = getActions()
+          getFavorites()
         }catch(error){
           console.log('Error deleting favorite starship:', error)
         }
       },
+
       detailsToShow: async (element) => {
         console.log("entre a detail", element)
         const store = getStore()
         await setStore({ ...store, currentDetailObject: element })
         await setStore({ ...store, isModalOpen: true })
       },
+
       detailsToShowPlanets: async (element) => {
         console.log("entre a detail", element)
         const store = getStore()
         await setStore({ ...store, currentDetailObjectPlanets: element })
         await setStore({ ...store, isModalOpenPlanets: true })
       },
+
       detailsToShowShips: async (element) => {
         console.log("entre a detail", element)
         const store = getStore()
         await setStore({ ...store, currentDetailObjectShips: element })
         await setStore({ ...store, isModalOpenShips: true })
       },
+      
       closeModal: () => {
         const store = getStore()
         setStore({ ...store, isModalOpen: false })

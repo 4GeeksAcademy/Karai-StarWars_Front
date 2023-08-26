@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { Context } from '../store/appContext'
 import LearnMore from "./LearnMore.jsx"
@@ -11,6 +11,24 @@ import StarshipLetter from "../../img/starship.png"
 const Favorites = () => {
 
     const { store, actions } = useContext(Context)
+    // const [ favoriteCharactersIds, setFavoriteCharactersIds] = useState()
+    // const [ favoritePlanetsIds, setFavoritePlanetsIds] = useState()
+    // const [ favoriteShipsIds, setFavoriteShipsIds] = useState()
+
+    // useEffect( () => {
+    //     const receiveFavorites = async () => {
+    //         const favorites = await actions.getFavorites()
+    //         console.log("estos son los favoritos",favorites)
+    //         setFavoriteCharactersIds(favorites.characters)
+    //         setFavoritePlanetsIds(favorites.planets)
+    //         setFavoriteShipsIds(favorites.starships)
+    //     }
+    //     receiveFavorites()
+    // }, [])
+
+    // useEffect(() => {
+    //     console.log('este es el estado local', favoriteCharactersIds)
+    // }, [favoriteCharactersIds])
 
     return (
         <div>
@@ -23,7 +41,7 @@ const Favorites = () => {
                     />
                 </div>
                 {
-                    store.favoriteCharactersIds.length & store.characters.length > 0 ? (
+                    store.favoriteCharactersIds.length > 0 & store.characters.length > 0 ? (
                         store.favoriteCharactersIds.map((element, index) => {
                             const character = store.characters.find((character) => character.id === element);
                             return (
@@ -48,7 +66,7 @@ const Favorites = () => {
                     />
                 </div>
                 {
-                    store.favoritePlanetsIds.length & store.planets.length > 0 ? (
+                    store.favoritePlanetsIds.length > 0 & store.planets.length > 0 ? (
                         store.favoritePlanetsIds.map((element, index) => {
 
                             const planet = store.planets.find((planet) => planet.id === element);
@@ -75,9 +93,8 @@ const Favorites = () => {
                     />
                 </div>
                 {
-                    store.favoriteShipsIds.length & store.starships.length > 0 ? (
+                    store.favoriteShipsIds.length > 0 & store.starships.length > 0 ? (
                         store.favoriteShipsIds.map((element, index) => {
-
                             const starship = store.starships.find((starship) => starship.id === element);
                             return (
                                 <li key={index} className={styles.dropdownContent}>
